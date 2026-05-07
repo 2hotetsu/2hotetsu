@@ -1,0 +1,176 @@
+.section {
+  padding: 50px 30px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 30px 5%;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--accent-gold);
+  padding-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 25px;
+  }
+}
+
+.sectionTitle {
+  font-size: 30px;
+  letter-spacing: 1.2px;
+  color: var(--primary);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 24px;
+  }
+}
+
+.symptomsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .symptomsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.symptomsImage {
+  width: 450px;
+  height: auto;
+}
+
+.symptomsImage img {
+  width: 100%;
+  height: auto;
+}
+.symptomsImageMobile{
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .symptomsImage {
+    display: none;
+  }
+  .symptomsImageMobile {
+    display: block;
+    width: 100%;
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.symptomsText {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  width: 600px;
+}
+
+@media (max-width: 1024px) {
+  .symptomsText {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .symptomsText {
+    gap: 25px;
+  }
+}
+
+.symptomsText h2 {
+  font-size: 22px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .symptomsText h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+.symptomsTextContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.symptomsText p {
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .symptomsTextContent{
+    gap: 12px;
+  }
+  .symptomsText p {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+}
+
+.symptomsDocuments {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.symptomsDocuments h2 {
+  margin-bottom: 10px;
+}
+
+.symptomsDocuments a {
+  border-bottom: 1px solid var(--accent-blue);
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.symptomsDocuments a p{
+  width: 100%;
+}
+
+.symptomsDocuments a img {
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 768px) {
+  .symptomsDocuments a img {
+    width: 25px;
+    height: 25px;
+  }
+  .symptomsDocuments h2{
+    color: var(--accent-gold);
+  }
+}
+
+
+

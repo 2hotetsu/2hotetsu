@@ -1,0 +1,183 @@
+{
+  "Index": {
+    "heroTitle": "At our clinic, we provide testing and diagnosis for dental metal allergies.",
+    "heroDescription": "If you are experiencing recurring skin symptoms and suspect that metals in the oral cavity may be a contributing factor, please feel free to consult with us."
+  },
+  "Header": {
+    "department": "Department of Stomatognathic Function and Occlusal Reconstruction",
+    "division": "Division of Dental Metal Allergy, Advanced Clinical Care Center",
+    "address1": "770-8503",
+    "address2": "2-50-1 Kuramoto-cho, Tokushima",
+    "address3": "+81-88-633-7371"
+  },
+  "Nav": {
+    "home": "Home",
+    "symptoms": "Symptoms",
+    "patchTest": "Patch Test",
+    "articles": "Articles",
+    "news": "News & Activities",
+    "highlights": "Highlights",
+    "researchGroup": "Research Group",
+    "access": "Access"
+  },
+  "Symptoms": {
+    "symptomsTitle": "Symptoms",
+    "introTitle": "Are you experiencing any of these symptoms?",
+    "text1": "Metal allergy is an allergic reaction that occurs when the body comes into contact with certain metals and may cause symptoms such as itching of the skin (as shown in the image).",
+    "text2": "In recent years, the number of individuals with metal allergies has increased, and reactions to metals used in dental treatment are also becoming more common.",
+    "text3": "At Tokushima University Hospital, we offer a specialized clinic for patients with metal allergies related to dental materials.",
+    "learnMore": "Learn more about metal allergies:",
+    "outpatientDocument": "Outpatient Clinic Brochure (PDF, Japanese only)",
+    "guideDocument": "Pamphlet: Enjoying Accessories Safely (PDF, Japanese only)"
+  },
+  "Patch": {
+    "patchTitle": "Patch Test",
+    "introTitle": "Testing for metal allergies is performed using a patch test, rather than a blood test.",
+    "text1": "During the test, special adhesive patches containing small amounts of various metals are applied to the back and left in place for two days.",
+    "text2": "After the patches are removed, the skin reaction is evaluated over three follow-up visits. This helps determine whether you have an allergy to specific metals.",
+    "text3": "If the test confirms an allergy to a particular metal, and that metal is used in dental treatment in your oral cavity, removal of the material may be recommended depending on your condition. In such cases, we will provide information to your regular dentist and work in coordination to ensure appropriate treatment.",
+    "moreInfo": "Download the Metal Allergy Clinic guide here (PDF, Japanese only)",
+    "observation1": "* All four visits are required to complete the patch test.",
+    "observation2": "* Patch testing is not available in July and August due to increased sweating."
+  },
+  "PatchFlow": {
+    "step1Left": "Initial Visit",
+    "step1Right1": "Medical Interview",
+    "step1Right2": "Scheduling of the patch test",
+    "step2Left1": "Patch Test",
+    "step2Left2": "Monday",
+    "step2Right": "Adhesive patches containing test materials are applied to the back and left in place for two days",
+    "step3Left1": "Patch Test",
+    "step3Left2": "Wednesday",
+    "step3Right1": "Removal of the patches",
+    "step3Right2": "Evaluation of the skin condition",
+    "step4Left1": "Patch Test",
+    "step4Left2": "Thursday",
+    "step4Right": "Follow-up evaluation of the skin condition",
+    "step5Left1": "Patch Test",
+    "step5Left2": "Following Monday",
+    "step5Right1": "Final Diagnosis",
+    "step5Right2": "Referral to your regular dentist"
+  },
+  "Schedule": {
+    "department": "Department",
+    "mon": "Mo",
+    "tue": "Tu",
+    "wed": "We",
+    "thu": "Th",
+    "fri": "Fr",
+    "receptionHours": "Reception Hours",
+    "departmentName1": "Advanced Clinical Care Center",
+    "departmentName2": "Dental Metal Allergy Clinic",
+    "departmentName3": "Initial Consultation Days",
+    "timeMorning": "8:30 - 11:00",
+    "timeAfternoon": "13:00 - 15:00"
+  },
+  "Articles": {
+    "articlesTitle": "Articles",
+    "menu1": "What is metal allergy?",
+    "menu2": "Would you like to know what metals are present?",
+    "menu3": "How to use earrings safely?",
+    "content1Title": "What is metal allergy",
+    "content1P1": "Metal allergy occurs when metals that come into contact with the skin or oral mucosa dissolve into ions and bind with proteins in the body, forming new substances. These substances may be recognized by the body as foreign, triggering an allergic reaction. \nMetal allergies are broadly classified into contact dermatitis and systemic metal allergy.",
+    "content1P2": "Contact dermatitis, commonly referred to as a skin rash, occurs when the skin reacts to substances it comes into contact with, such as metal accessories (e.g., necklaces and earrings), rubber products, cosmetics, medications, or plants. Symptoms may include redness, itching, rashes, or blisters.",
+    "content1P3": "Metals such as nickel are also found in foods including chocolate, cocoa, legumes, spices, shellfish, and whole grains. In addition, many dental materials contain metals such as palladium, gold, and tin. These metals can be absorbed through the skin, mucosa, gastrointestinal tract, and respiratory tract. \nIn patients with metal allergy, absorption of these metals may lead to dermatitis affecting the hands, feet, oral cavity, or the entire body. This condition is known as systemic metal dermatitis (systemic metal allergy).",
+    "content1P4": "(Source: Japanese Society of Allergology)",
+    "content2Title": "Would you like to know what metals are present?",
+    "content2P1": "At our clinic, we also offer elemental analysis of metal samples.",
+    "content2P2": "Using an X-ray fluorescence (XRF) analyzer, we can identify the types of metals contained in dental restorations—such as fillings, crowns, and dentures—as well as in metal products like earrings and necklaces, without damaging them.",
+    "content2P3": "By comparing these results with the findings of the patch test, we can help determine which dental materials may need to be removed and which metal products should be avoided.",
+    "content3Title": "Using Earrings Safely",
+    "content3P1": "In recent years, an increasing number of people have experienced skin problems such as redness, swelling, and irritation after wearing earrings.",
+    "content3P2": "If earrings are worn before the piercing site has fully healed, metals may dissolve and enter the body, potentially leading to metal allergy.",
+    "content3P3": "To help prevent metal allergy, we recommend using earrings properly and safely by following the points below:",
+    "content3P4": "＊ Do not pierce your ears yourself. Have your ears pierced at a medical institution such as a dermatology clinic, cosmetic clinic, or plastic surgery clinic.",
+    "content3P5": "＊ Follow the instructions provided and keep the area clean and properly disinfected until it has fully healed.",
+    "content3P6": "＊ If the skin is injured when inserting earrings, remove them and wait until the area has healed.",
+    "content3P7": "＊ Very inexpensive earrings may release metal due to sweating. It is important to choose products made from materials that are less likely to release metal.",
+    "content3P8": "＊ If you experience symptoms such as itching, redness, swelling, or discharge while wearing earrings, discontinue use immediately and consult a dermatologist or other medical professional.",
+    "moreInfo": "Pamphlet: Enjoying Accessories Safely (PDF, Japanese only)"
+  },
+  "News": {
+    "newsTitle": "News & Activities",
+    "viewAll": "View All"
+  },
+  "Highlights": {
+    "highlightsTitle": "Highlights",
+    "viewAll": "View All"
+  },
+  "Research": {
+    "researchTitle": "Research Group",
+    "introTitle": "Join Our Research Group",
+    "text1": "We welcome individuals and organizations who are interested in our activities related to metal allergy and the safety of metal products.",
+    "text2": "Working in collaboration with healthcare professionals, researchers, industry, and public institutions, we aim to promote a safer environment in which consumers can confidently select and use metal products.",
+    "text3": "If you are interested in contributing to these efforts, we encourage you to consider joining us.",
+    "joinButton": "Learn more about our Research Group.",
+    "activitiesTitle": "Activities & News",
+    "activitiesPlaceholder": "Currently, there are no announcements."
+  },
+  "Access": {
+    "accessTitle": "Access"
+  },
+  "Back": {
+    "backHighlights": "Back to Highlights",
+    "backNews": "Back to News"
+  },
+  "Read":{
+    "readMore": "Read More",
+    "viewAll": "View All"
+  },
+  "Footer": {
+    "division": "Division of Dental Metal Allergy",
+    "advanced": "Advanced Clinical Care Center",
+    "address": "2-50-1 Kuramoto-cho, Tokushima",
+    "phone": "+81-88-633-7371",
+    "copyright": "Research Group on Metal Allergy and Product Safety",
+    "quickLinks": "Quick Links",
+    "home": "Home",
+    "symptoms": "Symptoms",
+    "patchTest": "Patch Test",
+    "articles": "Articles",
+    "news": "News & Activities",
+    "highlights": "Highlights",
+    "researchGroup": "Research Group",
+    "access": "Access"
+  },
+  "ResearchPage": {
+    "heroTitle": "Research Group on Metal Allergy and Product Safety",
+    "introTitle": "Purpose",
+    "introText1": "A wide variety of metal accessories and everyday products are an essential part of our daily lives.",
+    "introText2": "However, there have been numerous reports of skin irritation and allergic reactions caused by contact with metallic components in these products, sometimes leading to adverse health effects. It is estimated that a significant number of individuals in Japan, particularly women, are affected by metal allergies.",
+    "introText3": "Metal allergy is a condition that can often be prevented through the appropriate use of products that do not release metal ions. In order to enable consumers to safely select and use metal products, it is necessary to establish appropriate regulations, including standards for metal release and labeling requirements.",
+    "introText4": "In collaboration with industry and governmental organizations, we aim to create an environment in which consumers can confidently choose and use metal products.",
+    "introText5": "The statement of purpose is available here. (PDF, Japanese only )",
+    "activitiesTitle": "Activities",
+    "activitiesText1": "We engage in the following activities:",
+    "activitiesText2": "Advocacy for the establishment and strengthening of safety standards for metal products",
+    "activitiesText3": "Providing information and raising awareness regarding the safety of metal products",
+    "activitiesText4": "Research on safety testing and certification systems for metal products",
+    "activitiesText5": "Collection of consumer feedback and complaints, and development of improvement proposals based on these insights",
+    "activitiesText6": "Organization of lectures and seminars to promote the use of safe metal products",
+    "activitiesText7": "The association’s regulations are available here. (PDF, Japanese only )",
+    "established": "Established",
+    "establishedDate": "September 5, 2025",
+    "membersTitle": "Members",
+    "membersText": "Our activities are carried out through collaboration among physicians, dentists, researchers, and consumer affairs advisors, integrating medical and dental expertise with practical experience in consumer consultation.",
+    "newsTitle": "News & Activities",
+    "viewAll": "View All",
+    "joinTitle": "How to Join",
+    "joinText1": "We welcome individuals and organizations who are interested in supporting our activities.",
+    "joinText2": "Please click the button or scan the QR code to access the membership registration form and submit your application.",
+    "button": "Join Now",
+    "joinMember1": "Full Member: Individuals or organizations who support the objectives of the association and actively participate in its activities",
+    "joinMember2": "Supporting Member: Individuals or organizations who provide support for the association’s activities",
+    "joinFee1": "There is no membership fee.",
+    "joinFee2": "However, if expenses arise in connection with our activities, we may request voluntary donations or contributions as needed.",
+    "officeTitle": "Administrative Office",
+    "officeName1": "Department of Stomatognathic Function and Occlusal Reconstruction",
+    "officeName2": "Graduate School of Biomedical Sciences, Tokushima University",
+    "officeAddress": "3-18-15 Kuramoto-cho, Tokushima City, Tokushima 770-8504, Japan",
+    "officeContact": "Contact:",
+    "noNews": "No research news available"
+  }
+}

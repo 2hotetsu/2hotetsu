@@ -1,0 +1,97 @@
+.section {
+  padding: 40px 30px 50px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 30px 5% 30px;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--accent-gold);
+  padding-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .sectionHeader {
+    margin-bottom: 25px;
+  }
+}
+
+.sectionTitle {
+  font-size: 30px;
+  letter-spacing: 1.2px;
+  color: var(--primary);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 24px;
+  }
+}
+
+.researchText {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media (max-width: 1200px) {
+  .researchText {
+    gap: 25px;
+  }
+}
+
+.researchTextHeader h2 {
+  font-size: 23px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .researchTextHeader h2 {
+    font-size: 20px;
+  }
+}
+
+.researchTextContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 1000px;
+  max-width: 100%;
+}
+
+.researchText p {
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .researchText p {
+    font-size: 16px;
+  }
+}
+
+.joinButton {
+  color: var(--secondary);
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+  border-bottom: 1px solid var(--secondary);
+  width: fit-content;
+}
+
+@media (max-width: 768px) {
+  .joinButton {
+    font-size: 17px;
+  }
+}

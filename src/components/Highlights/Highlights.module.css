@@ -1,0 +1,268 @@
+.sectionAlt {
+  background-color: var(--background-alt);
+}
+
+.sectionAltContainer {
+  padding: 30px 30px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .sectionAltContainer {
+    padding: 30px 15px;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--accent-gold);
+  padding-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .sectionHeader {
+    margin-bottom: 25px;
+  }
+}
+
+.sectionTitle {
+  font-size: 30px;
+  letter-spacing: 1.2px;
+  color: var(--primary);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 24px;
+  }
+}
+
+.viewAll {
+  color: var(--secondary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .viewAll {
+    font-size: 14px;
+  }
+}
+
+.highlightsLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+@media (min-width: 900px) {
+  .highlightsLayout {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+}
+
+.leftColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.rightColumn {
+  flex: 1.5;
+  background: white;
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .rightColumn {
+    display: none;
+  }
+}
+
+.leftCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.leftCard {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 4px;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.leftCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 480px) {
+  .leftCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+
+.leftCardImageWrapper {
+  flex-shrink: 0;
+  width: 100px;
+  aspect-ratio: 16/10;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 20px;
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 480px) {
+  .leftCardImageWrapper {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+.leftCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.leftCardBody {
+  flex-grow: 1;
+}
+
+.leftCard h4 {
+  font-size: 16px;
+  color: var(--foreground);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.leftCardDate {
+  font-size: 12px;
+  color: var(--secondary);
+  display: block;
+  margin-top: 5px;
+}
+
+.leftCardArrow {
+  flex-shrink: 0;
+  margin-left: 15px;
+  background: var(--accent-blue);
+  color: var(--background);
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  padding-bottom: 3px;
+}
+
+@media (max-width: 480px) {
+  .leftCardArrow {
+    display: none;
+  }
+}
+
+/* Slider CSS additions */
+.carouselContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.carouselLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.carouselImageWrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.youtubeWrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  position: relative;
+}
+
+.youtubeWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.carouselCaption {
+  text-align: center;
+  padding: 20px 10px 10px;
+}
+
+.carouselCaption p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+@media (max-width: 768px) {
+  .carouselCaption p {
+    font-size: 14px;
+  }
+}
+
+/* Customizing Splide Pagination */
+.carouselContainer :global(.splide__pagination) {
+  bottom: -35px;
+}
+
+.carouselContainer :global(.splide__pagination__page) {
+  background: white;
+  border: 1px solid #ddd;
+  width: 8px;
+  height: 8px;
+  margin: 3px;
+}
+
+.carouselContainer :global(.splide__pagination__page.is-active) {
+  background: #a45a6c;
+  transform: scale(1.1);
+  border: none;
+}
