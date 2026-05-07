@@ -3,7 +3,7 @@ import FadeIn from "@/components/FadeIn/FadeIn";
 import Image from 'next/image';
 import styles from "./page.module.css";
 import heroImg from '@/img/research/hero.png';
-import PdfPreview from '@/components/PdfPreview/PdfPreview';
+import PdfPreview from '@/components/PdfPreview/PdfPreviewNoSSR';
 import Link from 'next/link';
 import Access from '@/components/Access/Access';
 import joinImg from '@/img/research/qr-code.png';
