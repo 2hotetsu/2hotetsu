@@ -36,7 +36,7 @@ export default function DeptNav() {
         </div>
       </div>
 
-      <div id="nav">
+      <div id="nav" className="nav-desktop">
         <div id="nav_cont">
           <ul>
             {navItems.map(({ href, img, alt }) => {
@@ -49,7 +49,7 @@ export default function DeptNav() {
                     <Image
                       src={src}
                       alt={alt}
-                      width={106}
+                      width={113}
                       height={60}
                       className="hoverImg"
                     />
@@ -60,6 +60,20 @@ export default function DeptNav() {
           </ul>
         </div>
       </div>
+
+      <nav className="nav-mobile">
+        <ul>
+          {navItems.map(({ href, alt }) => {
+            const isActive =
+              href === "/" ? pathname === "/" : pathname.startsWith(href);
+            return (
+              <li key={href} className={isActive ? "active" : ""}>
+                <Link href={href}>{alt}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </>
   );
 }
