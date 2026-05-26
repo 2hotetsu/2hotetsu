@@ -1,5 +1,32 @@
+import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import FadeIn from "@/components/FadeIn/FadeIn";
+import { SITE_URL } from '@/lib/siteConfig';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isJa = locale !== 'en';
+  return {
+    title: isJa ? '研究会' : 'Research Group',
+    description: isJa
+      ? '歯科用金属アレルギー研究会の活動内容・目的・入会案内についてご紹介します。歯科用金属アレルギーの予防と研究を目的とした専門研究会です。'
+      : 'Introduction to the Dental Metal Allergy Research Group — activities, purpose, and membership information. A specialized research group dedicated to the prevention and study of dental metal allergies.',
+    keywords: isJa
+      ? '歯科金属アレルギー研究会,金属アレルギー研究,歯科金属アレルギー予防,徳島大学,金属アレルギー学術'
+      : 'dental metal allergy research, metal allergy research group, Tokushima University',
+    alternates: {
+      canonical: `${SITE_URL}/allergy/${locale}/research`,
+      languages: {
+        ja: `${SITE_URL}/allergy/ja/research`,
+        en: `${SITE_URL}/allergy/en/research`,
+      },
+    },
+  };
+}
 import Image from 'next/image';
 import styles from "./page.module.css";
 import heroImg from '@/img/research/hero.png';

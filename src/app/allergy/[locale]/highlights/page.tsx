@@ -1,8 +1,32 @@
+import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { client } from '@/sanity/lib/client';
 import { highlightsQuery } from '@/sanity/lib/queries';
 import PostList from '@/components/PostList/PostList';
 import FadeIn from '@/components/FadeIn/FadeIn';
+import { SITE_URL } from '@/lib/siteConfig';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isJa = locale !== 'en';
+  return {
+    title: isJa ? 'ハイライト' : 'Highlights',
+    description: isJa
+      ? '歯科用金属アレルギー外来のハイライト・注目トピックス一覧です。'
+      : 'Highlights and featured topics from the Dental Metal Allergy Clinic.',
+    alternates: {
+      canonical: `${SITE_URL}/allergy/${locale}/highlights`,
+      languages: {
+        ja: `${SITE_URL}/allergy/ja/highlights`,
+        en: `${SITE_URL}/allergy/en/highlights`,
+      },
+    },
+  };
+}
 
 export default async function HighlightsListPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -12,9 +36,9 @@ export default async function HighlightsListPage({ params }: { params: Promise<{
 
   return (
     <FadeIn>
-      <PostList 
-        title={`${t('highlightsTitle')}`} 
-        items={highlights} 
+      <PostList
+        title={`${t('highlightsTitle')}`}
+        items={highlights}
         basePath={`/allergy/${locale}/highlights`}
       />
     </FadeIn>

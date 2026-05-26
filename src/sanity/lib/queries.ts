@@ -1,5 +1,34 @@
 import { groq } from 'next-sanity'
 
+// All slugs with publish dates — used by sitemap
+export const allSlugsQuery = groq`{
+  "posts": *[_type == "post" && defined(slug.current)] { "slug": slug.current, publishedAt },
+  "highlights": *[_type == "highlight" && defined(slug.current)] { "slug": slug.current, publishedAt },
+  "researchNews": *[_type == "researchNews" && defined(slug.current)] { "slug": slug.current, publishedAt }
+}`
+
+// Lean metadata queries for generateMetadata (title only)
+export const postMetaBySlugQuery = groq`
+  *[_type == "post" && slug.current == $slug][0] {
+    "title": coalesce(select($locale == "en" => title_en, title_ja), title),
+    mainImage { asset->{ url } }
+  }
+`
+
+export const highlightMetaBySlugQuery = groq`
+  *[_type == "highlight" && slug.current == $slug][0] {
+    "title": coalesce(select($locale == "en" => title_en, title_ja), title),
+    mainImage { asset->{ url } }
+  }
+`
+
+export const researchNewsMetaBySlugQuery = groq`
+  *[_type == "researchNews" && slug.current == $slug][0] {
+    "title": coalesce(select($locale == "en" => title_en, title_ja), title),
+    mainImage { asset->{ url } }
+  }
+`
+
 // Get all posts, ordered by publish date
 export const postsQuery = groq`
   *[_type == "post" && defined(slug.current)]
