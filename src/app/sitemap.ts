@@ -3,6 +3,8 @@ import { client } from '@/sanity/lib/client';
 import { allSlugsQuery } from '@/sanity/lib/queries';
 import { SITE_URL } from '@/lib/siteConfig';
 
+export const revalidate = 86400; // regenerate once per day
+
 const LOCALES = ['ja', 'en'] as const;
 
 type SlugEntry = { slug: string; publishedAt?: string };
