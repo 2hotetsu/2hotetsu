@@ -41,6 +41,46 @@ export async function generateMetadata({
   };
 }
 
+const NATURE_ARTICLE_URL = 'https://www.nature.com/articles/s41598-025-86868-1';
+const NATURE_ARTICLE_DOI = 'https://doi.org/10.1038/s41598-025-86868-1';
+
+const scholarlyArticleJsonLd = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline:
+    'Correlation between pierced earrings and the prevalence of metal allergies at Tokushima university hospital: a 15-year retrospective analysis',
+  author: [
+    { '@type': 'Person', name: 'Toyoko Tajima', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Maki Hosoki', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Mayu Miyagi', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Miho Inoue', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Aya Ozawa', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Mizuki Shinkai', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Mio Naritani', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Yoshiaki Kubo', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Swarnalakshmi Raman', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Parimal Ravindra Chavan', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Kazuyuki Koike', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+    { '@type': 'Person', name: 'Yoshizo Matsuka', affiliation: { '@type': 'CollegeOrUniversity', name: 'Tokushima University' } },
+  ],
+  datePublished: '2025-03-29',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Nature Publishing Group',
+    sameAs: 'https://www.nature.com',
+  },
+  isPartOf: {
+    '@type': 'Periodical',
+    name: 'Scientific Reports',
+    issn: '2045-2322',
+    volumeNumber: '15',
+  },
+  articleNumber: '10939',
+  url: NATURE_ARTICLE_URL,
+  sameAs: NATURE_ARTICLE_DOI,
+  about: { '@type': 'MedicalCondition', name: 'Dental Metal Allergy' },
+});
+
 const clinicJsonLd = (locale: string) => ({
   '@context': 'https://schema.org',
   '@type': 'MedicalClinic',
@@ -65,6 +105,36 @@ const clinicJsonLd = (locale: string) => ({
     url: 'https://www.tokushima-hosp.jp',
   },
   medicalSpecialty: 'Dentistry',
+  subjectOf: {
+    '@type': 'NewsArticle',
+    headline: locale === 'ja' ? '装身金属安全基準を　徳大など国に策定求める' : 'Safety Standards for Wearable Metal Products — Tokushima University and Others Call on Government to Establish Standards',
+    url: 'https://www.yomiuri.co.jp/local/tokushima/news/20260420-GYTNT00161/',
+    datePublished: '2026-04-21',
+    publisher: {
+      '@type': 'Organization',
+      name: locale === 'ja' ? '読売新聞' : 'The Yomiuri Shimbun',
+      sameAs: 'https://www.yomiuri.co.jp',
+    },
+  },
+  staff: [
+    {
+      '@type': 'Person',
+      name: 'Yoshizo Matsuka',
+      jobTitle: locale === 'ja' ? '教授' : 'Professor',
+      affiliation: {
+        '@type': 'CollegeOrUniversity',
+        name: locale === 'ja' ? '徳島大学' : 'Tokushima University',
+      },
+    },
+    {
+      '@type': 'Person',
+      name: 'Maki Hosoki',
+      affiliation: {
+        '@type': 'CollegeOrUniversity',
+        name: locale === 'ja' ? '徳島大学' : 'Tokushima University',
+      },
+    },
+  ],
 });
 
 const medicalConditionJsonLd = (locale: string) => ({
@@ -119,6 +189,15 @@ const medicalConditionJsonLd = (locale: string) => ({
   recognizingAuthority: {
     '@type': 'MedicalOrganization',
     name: locale === 'ja' ? '日本アレルギー学会' : 'Japanese Society of Allergology',
+  },
+  citation: {
+    '@type': 'ScholarlyArticle',
+    headline:
+      'Correlation between pierced earrings and the prevalence of metal allergies at Tokushima university hospital: a 15-year retrospective analysis',
+    url: NATURE_ARTICLE_URL,
+    sameAs: NATURE_ARTICLE_DOI,
+    datePublished: '2025-03-29',
+    publisher: { '@type': 'Organization', name: 'Scientific Reports' },
   },
 });
 
@@ -196,6 +275,15 @@ const patchTestJsonLd = (locale: string) => ({
         : 'Tokushima University Hospital Dental Metal Allergy Clinic',
     url: `${SITE_URL}/allergy/${locale}`,
   },
+  citation: {
+    '@type': 'ScholarlyArticle',
+    headline:
+      'Correlation between pierced earrings and the prevalence of metal allergies at Tokushima university hospital: a 15-year retrospective analysis',
+    url: NATURE_ARTICLE_URL,
+    sameAs: NATURE_ARTICLE_DOI,
+    datePublished: '2025-03-29',
+    publisher: { '@type': 'Organization', name: 'Scientific Reports' },
+  },
 });
 
 const faqJsonLd = (locale: string) => ({
@@ -266,6 +354,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   return (
     <div className={styles.container}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(scholarlyArticleJsonLd()) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicJsonLd(locale)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalConditionJsonLd(locale)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(patchTestJsonLd(locale)) }} />
