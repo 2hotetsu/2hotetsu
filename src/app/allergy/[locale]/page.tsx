@@ -99,6 +99,27 @@ const clinicJsonLd = (locale: string) => ({
     postalCode: '770-8503',
     addressCountry: 'JP',
   },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 34.0756,
+    longitude: 134.5596,
+  },
+  areaServed: [
+    {
+      '@type': 'Country',
+      name: 'Japan',
+      sameAs: 'https://www.wikidata.org/wiki/Q17',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: locale === 'ja' ? '徳島県' : 'Tokushima Prefecture',
+      sameAs: 'https://www.wikidata.org/wiki/Q131287',
+    },
+  ],
+  availableLanguage: [
+    { '@type': 'Language', name: 'Japanese', alternateName: 'ja' },
+    { '@type': 'Language', name: 'English', alternateName: 'en' },
+  ],
   parentOrganization: {
     '@type': 'Hospital',
     name: locale === 'ja' ? '徳島大学病院' : 'Tokushima University Hospital',
