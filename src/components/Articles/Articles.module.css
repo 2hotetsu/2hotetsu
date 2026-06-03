@@ -204,6 +204,29 @@
   }
 }
 
+.bodyImageWrapper {
+  display: inline-flex;
+  margin: 0.5rem 0.75rem 0.5rem 0;
+}
+
+.bodyImage {
+  width: 320px;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .bodyImageWrapper {
+    display: flex;
+    margin: 0.5rem auto;
+  }
+  .bodyImage {
+    width: 100%;
+  }
+}
+
 .moreInfo {
   margin-top: 20px;
   width: 100%;

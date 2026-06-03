@@ -119,6 +119,19 @@ export const researchNewsQuery = groq`
   }
 `
 
+// Get all article tabs, ordered by the order field
+export const articleTabsQuery = groq`
+  *[_type == "articleTab"]
+  | order(order asc)
+  {
+    _id,
+    "title": coalesce(select($locale == "en" => title_en, title_ja), title_ja),
+    "contentTitle": coalesce(select($locale == "en" => contentTitle_en, contentTitle_ja), contentTitle_ja),
+    "body": coalesce(select($locale == "en" => body_en, body_ja), body_ja),
+    images[] { asset->, alt },
+  }
+`
+
 // Get a single research news by its slug
 export const researchNewsBySlugQuery = groq`
   *[_type == "researchNews" && slug.current == $slug][0] {

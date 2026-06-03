@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'deptNews',
-  title: '新着情報（学科）',
+  title: '新着情報（Department page）',
   type: 'document',
   fields: [
     defineField({

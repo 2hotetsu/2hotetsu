@@ -402,7 +402,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </FadeIn>
 
         <FadeIn>
-          <Articles />
+          <Articles params={params} />
         </FadeIn>
 
         <FadeIn>
