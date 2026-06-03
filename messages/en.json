@@ -1,7 +1,9 @@
 {
   "Index": {
     "heroTitle": "At our clinic, we provide testing and diagnosis for dental metal allergies.",
-    "heroDescription": "If you are experiencing recurring skin symptoms and suspect that metals in the oral cavity may be a contributing factor, please feel free to consult with us."
+    "heroTitle2": "",
+    "heroDescription": "If you are experiencing recurring skin symptoms and suspect that metals in the oral cavity may be a contributing factor, please feel free to consult with us.",
+    "heroDescription2": ""
   },
   "Header": {
     "department": "Department of Stomatognathic Function and Occlusal Reconstruction",
@@ -17,7 +19,7 @@
     "articles": "Articles",
     "news": "News & Activities",
     "highlights": "Highlights",
-    "researchGroup": "Research Group",
+    "researchGroup": "ASMI",
     "access": "Access"
   },
   "Symptoms": {
@@ -87,15 +89,16 @@
     "content2P1": "At our clinic, we also offer elemental analysis of metal samples.",
     "content2P2": "Using an X-ray fluorescence (XRF) analyzer, we can identify the types of metals contained in dental restorations—such as fillings, crowns, and dentures—as well as in metal products like earrings and necklaces, without damaging them.",
     "content2P3": "By comparing these results with the findings of the patch test, we can help determine which dental materials may need to be removed and which metal products should be avoided.",
+    "content2P4": "Metal analysis is available at our clinic as a non-insured service (self-pay). If you would like to request an analysis, please contact the clinic.",
     "content3Title": "Using Earrings Safely",
     "content3P1": "In recent years, an increasing number of people have experienced skin problems such as redness, swelling, and irritation after wearing earrings.",
     "content3P2": "If earrings are worn before the piercing site has fully healed, metals may dissolve and enter the body, potentially leading to metal allergy.",
     "content3P3": "To help prevent metal allergy, we recommend using earrings properly and safely by following the points below:",
-    "content3P4": "＊ Do not pierce your ears yourself. Have your ears pierced at a medical institution such as a dermatology clinic, cosmetic clinic, or plastic surgery clinic.",
-    "content3P5": "＊ Follow the instructions provided and keep the area clean and properly disinfected until it has fully healed.",
-    "content3P6": "＊ If the skin is injured when inserting earrings, remove them and wait until the area has healed.",
-    "content3P7": "＊ Very inexpensive earrings may release metal due to sweating. It is important to choose products made from materials that are less likely to release metal.",
-    "content3P8": "＊ If you experience symptoms such as itching, redness, swelling, or discharge while wearing earrings, discontinue use immediately and consult a dermatologist or other medical professional.",
+    "content3P4": "Do not pierce your ears yourself. Have your ears pierced at a medical institution such as a dermatology clinic, cosmetic clinic, or plastic surgery clinic.",
+    "content3P5": "Follow the instructions provided and keep the area clean and properly disinfected until it has fully healed.",
+    "content3P6": "If the skin is injured when inserting earrings, remove them and wait until the area has healed.",
+    "content3P7": "Very inexpensive earrings may release metal due to sweating. It is important to choose products made from materials that are less likely to release metal.",
+    "content3P8": "If you experience symptoms such as itching, redness, swelling, or discharge while wearing earrings, discontinue use immediately and consult a dermatologist or other medical professional.",
     "moreInfo": "Pamphlet: Enjoying Accessories Safely (PDF, Japanese only)"
   },
   "News": {
@@ -107,7 +110,7 @@
     "viewAll": "View All"
   },
   "Research": {
-    "researchTitle": "Research Group",
+    "researchTitle": "ASMI: Association for Safe Use of Metal Items",
     "introTitle": "Join Our Research Group",
     "text1": "We welcome individuals and organizations who are interested in our activities related to metal allergy and the safety of metal products.",
     "text2": "Working in collaboration with healthcare professionals, researchers, industry, and public institutions, we aim to promote a safer environment in which consumers can confidently select and use metal products.",
@@ -140,17 +143,18 @@
     "articles": "Articles",
     "news": "News & Activities",
     "highlights": "Highlights",
-    "researchGroup": "Research Group",
+    "researchGroup": "ASMI",
     "access": "Access"
   },
   "ResearchPage": {
-    "heroTitle": "Research Group on Metal Allergy and Product Safety",
+    "heroTitle": "ASMI: Association for Safe Use of Metal Items",
     "introTitle": "Purpose",
     "introText1": "A wide variety of metal accessories and everyday products are an essential part of our daily lives.",
-    "introText2": "However, there have been numerous reports of skin irritation and allergic reactions caused by contact with metallic components in these products, sometimes leading to adverse health effects. It is estimated that a significant number of individuals in Japan, particularly women, are affected by metal allergies.",
-    "introText3": "Metal allergy is a condition that can often be prevented through the appropriate use of products that do not release metal ions. In order to enable consumers to safely select and use metal products, it is necessary to establish appropriate regulations, including standards for metal release and labeling requirements.",
-    "introText4": "In collaboration with industry and governmental organizations, we aim to create an environment in which consumers can confidently choose and use metal products.",
-    "introText5": "The statement of purpose is available here. (PDF, Japanese only )",
+    "introText2": "However, numerous cases have been reported in which metallic components contained in these products cause skin irritation or allergic reactions through contact with the skin, sometimes resulting in adverse health effects. It is estimated that a significant number of people in Japan, particularly women, are affected by metal allergies.",
+    "introText3": "Metal allergy is a condition that can often be prevented through the appropriate use of products that do not release metal ions.",
+    "introText4": "To ensure that consumers can safely choose and use metal products, legal measures are needed, including regulations on metal release levels and product labeling requirements.",
+    "introText5": "In collaboration with industry and governmental organizations, we are working to create an environment in which consumers can confidently select and use metal products.",
+    "introText6": "The statement of purpose is available here. (PDF, Japanese only )",
     "activitiesTitle": "Activities",
     "activitiesText1": "We engage in the following activities:",
     "activitiesText2": "Advocacy for the establishment and strengthening of safety standards for metal products",

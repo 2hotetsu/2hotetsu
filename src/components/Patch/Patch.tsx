@@ -69,7 +69,7 @@ export default async function Patch() {
                         <p>{t('observation2')}</p>
                     </div>
                     <div className={styles.moreInfo}>
-                        <Link href="/documents/徳島大学病院_金属アレルギー外来_パッチテスト.pdf" target="_blank" rel="noopener noreferrer">
+                        <Link href="/documents/徳島大学病院_金属アレルギー外来パンフレット最終版.pdf" target="_blank" rel="noopener noreferrer">
                             <p>{t('moreInfo')}</p>
                             <Image src={pdfDownload} alt="PDF Download" width={20} height={20} />
                         </Link>

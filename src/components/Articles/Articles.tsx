@@ -59,6 +59,7 @@ export default function Articles() {
                     <p>{t('content2P1')}</p>
                     <p>{t('content2P2')}</p>
                     <p>{t('content2P3')}</p>
+                    <p>{t('content2P4')}</p>
                     <div className={styles.images}>
                         <Image src={xray} alt="" width={320} height={240} />
                         <Image src={results} alt="" width={320} height={240} />
@@ -84,7 +85,7 @@ export default function Articles() {
             </div>
 
             <div className={styles.moreInfo}>
-                <Link href="/documents/徳島大学病院_金属アレルギー外来_パッチテスト.pdf" target="_blank" rel="noopener noreferrer">
+                <Link href="/documents/アクセサリーをいつまでも楽しむために.pdf" target="_blank" rel="noopener noreferrer">
                     <p>{t('moreInfo')}</p>
                     <Image src={pdfDownload} alt="PDF Download" width={20} height={20} />
                 </Link>

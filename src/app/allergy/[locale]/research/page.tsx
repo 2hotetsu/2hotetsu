@@ -91,7 +91,8 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
                 <p>{t('introText2')}</p>
                 <p>{t('introText3')}</p>
                 <p>{t('introText4')}</p>
-                <Link href="/documents/設立趣意書.pdf" target="_blank" rel="noopener noreferrer">{t('introText5')}</Link>
+                <p>{t('introText5')}</p>
+                <Link href="/documents/設立趣意書.pdf" target="_blank" rel="noopener noreferrer">{t('introText6')}</Link>
               </div>
               <div className={styles.introPdf}>
                 <PdfPreview file="/documents/金属アレルギー予防の取組.pdf" />
@@ -127,11 +128,11 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
                       <p>{t('activitiesText6')}</p>
                     </li>
                   </ol>
-                  <Link href="/documents/設立趣意書.pdf" target="_blank" rel="noopener noreferrer">{t('activitiesText7')}</Link>
-                </div>
-                <div className={styles.activitiesRight}>
-                  <h3>{t('established')}</h3>
-                  <p>{t('establishedDate')}</p>
+                  <Link href="/documents/規約.pdf" target="_blank" rel="noopener noreferrer">{t('activitiesText7')}</Link>
+                  <div className={styles.activitiesBottom}>
+                    <h3>{t('established')}</h3>
+                    <p>{t('establishedDate')}</p>
+                  </div>
                 </div>
               </div>
               <div className={styles.activitiesBottom}>

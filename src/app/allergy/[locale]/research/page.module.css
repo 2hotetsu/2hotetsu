@@ -203,14 +203,14 @@
 .activities {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 15px;
   font-size: 18px;
   line-height: 1.4;
   color: var(--foreground);
 }
 
 .activities h3 {
-  font-size: 28px;
+  font-size: 22px;
   color: var(--primary);
 }
 
@@ -220,26 +220,14 @@
   }
   .activities {
     font-size: 16px;
-    gap: 30px;
-  }
-}
-
-.activitiesTop {
-  display: flex;
-  gap: 40px;
-}
-
-@media (max-width: 1024px) {
-  .activitiesTop {
-    flex-direction: column;
-    gap: 20px;
+    gap: 5px
   }
 }
 
 .activitiesText {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   width: 80%;
 }
 
@@ -258,37 +246,17 @@
 }
 
 .activitiesText a {
-  margin-top: 45px;
   color: var(--secondary);
   padding-bottom: 3px;
   border-bottom: 1px solid var(--secondary);
   width: fit-content;
 }
 
-.activitiesRight {
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  align-self: flex-end;
-  text-align: right;
-}
-
-@media (max-width: 1024px) {
-  .activitiesRight {
-    width: 100%;
-    text-align: left;
-    align-self: flex-start;
-  }
-}
-
 .activitiesBottom {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  text-align: center;
-  width: 800px;
-  max-width: 100%;
-  margin: 0 auto;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 @media (max-width: 768px) {

@@ -382,8 +382,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(locale)) }} />
       <main className={styles.main}>
         <HeroSlider>
-          <h2>{t('heroTitle')}</h2>
-          <p>{t('heroDescription')}</p>
+          <div>
+            <h2>{t('heroTitle')}</h2>
+            <h2>{t('heroTitle2')}</h2>
+          </div>
+          <div>
+            <p>{t('heroDescription')}</p>
+            <p>{t('heroDescription2')}</p>
+          </div>
         </HeroSlider>
         <Nav />
 
