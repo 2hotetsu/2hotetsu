@@ -57,12 +57,28 @@ export default function DeptScripts() {
             .removeClass('diapocurrent diapostarted');
           diapo.removeClass('diaposliding diapostarted stopped');
 
+          // Force a pixel height before diapo reads elem.height(), because on mobile
+          // the container uses height:auto + aspect-ratio and some jQuery versions
+          // return 0 for that. getBoundingClientRect is always accurate after layout.
+          const diapoEl = diapo[0] as HTMLElement;
+          const computedH = diapoEl.getBoundingClientRect().height;
+          if (computedH > 0) {
+            diapo.css('height', computedH + 'px');
+          }
+
           diapo.diapo({
             fx: 'random,simpleFade',
+            // diapo.js sets clickEv='tap' on mobile but jQuery has no .tap() without
+            // jQuery Mobile — disabling these avoids the TypeError that kills init.
+            pauseOnClick: false,
+            navigation: false,
+            mobileNavigation: false,
+            commands: false,
+            mobileCommands: false,
             pagination: false,
+            mobilePagination: false,
             thumbs: false,
             loader: 'none',
-            commands: false,
             gridDifference: 100,
             transPeriod: 3000,
             time: 800,
