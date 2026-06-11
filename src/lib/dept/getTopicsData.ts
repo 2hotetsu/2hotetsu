@@ -4,7 +4,7 @@ import { join } from 'path';
 export interface TopicsEntry {
   id: string;       // e.g. " topics94-0"
   date: string;     // YYYY-MM-01
-  text: string;     // truncated Japanese text
+  text: string;     // full Japanese text
   anchor: string;   // "/topics#topics94"
   source: 'topics';
 }
@@ -19,18 +19,6 @@ function stripHtml(html: string): string {
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-}
-
-function truncate(text: string, max = 80): string {
-  if (text.length <= max) return text;
-  // try to cut at a Japanese sentence boundary
-  const cut = text.slice(0, max);
-  const lastPunct = Math.max(
-    cut.lastIndexOf('。'),
-    cut.lastIndexOf('、'),
-    cut.lastIndexOf(' '),
-  );
-  return (lastPunct > max * 0.6 ? cut.slice(0, lastPunct + 1) : cut) + '…';
 }
 
 export function getTopicsData(limit = 20): TopicsEntry[] {
@@ -59,7 +47,7 @@ export function getTopicsData(limit = 20): TopicsEntry[] {
       if (!raw || raw.length < 5) continue;
 
 
-      const text = truncate(raw);
+      const text = raw;
 
       entries.push({
         id: `${anchor}-${idx}`,

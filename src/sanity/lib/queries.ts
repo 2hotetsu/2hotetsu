@@ -119,6 +119,19 @@ export const researchNewsQuery = groq`
   }
 `
 
+// Get the latest department news entries (used on the dept home page and topics page)
+export const deptNewsQuery = groq`
+  *[_type == "deptNews"] | order(date desc)[0...$limit] {
+    _id,
+    date,
+    body,
+    images[] {
+      asset->{ url, metadata { dimensions } },
+      alt
+    }
+  }
+`
+
 // Get all article tabs, ordered by the order field
 export const articleTabsQuery = groq`
   *[_type == "articleTab"]

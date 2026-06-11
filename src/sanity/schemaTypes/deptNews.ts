@@ -22,9 +22,23 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'link',
-      title: 'リンク先URL（任意）',
-      type: 'url',
+      name: 'images',
+      title: '画像（任意・最大2枚）',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: '代替テキスト / Alt Text',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
+      validation: (Rule) => Rule.max(2),
     }),
   ],
   orderings: [

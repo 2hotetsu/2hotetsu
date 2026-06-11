@@ -1,33 +1,11 @@
-import { client } from "@/sanity/lib/client";
+import { getDeptNews, getMonthAnchor } from "@/lib/dept/getDeptNews";
 import { getTopicsData, type TopicsEntry } from "@/lib/dept/getTopicsData";
-
-interface SanityNewsItem {
-  _id: string;
-  date: string;
-  body: string;
-  link?: string;
-}
 
 interface NewsEntry {
   id: string;
   date: string;
   text: string;
-  link?: string;
-  source: 'sanity' | 'topics';
-}
-
-async function getSanityNews(): Promise<SanityNewsItem[]> {
-  try {
-    return await client.fetch(
-      `*[_type == "deptNews"] | order(date desc)[0...15] {
-        _id, date, body, link
-      }`,
-      {},
-      { next: { revalidate: 3600 } }
-    );
-  } catch {
-    return [];
-  }
+  link: string;
 }
 
 function formatDate(dateStr: string): string {
@@ -38,7 +16,7 @@ function formatDate(dateStr: string): string {
 export default async function DeptNews() {
   // fetch both sources in parallel
   const [sanityItems, topicsItems] = await Promise.all([
-    getSanityNews(),
+    getDeptNews(15),
     Promise.resolve(getTopicsData(20)),
   ]);
 
@@ -47,8 +25,7 @@ export default async function DeptNews() {
     id: item._id,
     date: item.date,
     text: item.body,
-    link: item.link,
-    source: 'sanity',
+    link: `/topics#${getMonthAnchor(item.date)}`,
   }));
 
   // normalise topics entries — only use as many as needed to reach 15 total
@@ -57,7 +34,6 @@ export default async function DeptNews() {
     date: item.date,
     text: item.text,
     link: item.anchor,
-    source: 'topics',
   }));
 
   // merge: Sanity first, then topics to fill up to 15
@@ -79,17 +55,7 @@ export default async function DeptNews() {
         <div key={item.id}>
           <dt>{formatDate(item.date)}</dt>
           <dd>
-            {item.link ? (
-              <a
-                href={item.link}
-                target={item.source === 'sanity' && item.link.startsWith('http') ? '_blank' : undefined}
-                rel={item.source === 'sanity' && item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-              >
-                {item.text}
-              </a>
-            ) : (
-              item.text
-            )}
+            <a href={item.link}>{item.text}</a>
           </dd>
         </div>
       ))}
