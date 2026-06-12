@@ -97,14 +97,14 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
 
       <div className="hm-hero-content">
         <p className="hm-hero-meta">徳島大学大学院医歯薬学研究部　口腔科学部門　臨床歯学系</p>
-        <h1 className="hm-hero-title">
+        {/* <h1 className="hm-hero-title">
           <span className="hm-hero-line">
             <span className="hm-hero-line-inner">噛む機能を、科学する。</span>
           </span>
           <span className="hm-hero-line">
             <span className="hm-hero-line-inner">口腔から、健やかな未来へ。</span>
           </span>
-        </h1>
+        </h1> */}
         <p className="hm-hero-sub">
           顎機能咬合再建学分野
           <span>Department of Stomatognathic Function and Occlusal Reconstruction</span>

@@ -119,6 +119,16 @@ export const researchNewsQuery = groq`
   }
 `
 
+// Get all achievement entries, newest first (used on the achievements page,
+// prepended to the frozen archive lists)
+export const achievementsQuery = groq`
+  *[_type == "achievement"] | order(_createdAt desc) {
+    _id,
+    title,
+    category
+  }
+`
+
 // Get the latest department news entries (used on the dept home page and topics page)
 export const deptNewsQuery = groq`
   *[_type == "deptNews"] | order(date desc)[0...$limit] {
