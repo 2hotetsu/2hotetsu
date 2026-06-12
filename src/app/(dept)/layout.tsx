@@ -28,9 +28,13 @@ export default function DeptLayout({
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
         rel="stylesheet"
       />
-      <DeptNav />
-      {children}
-      <DeptFooter />
+      {/* .dept-root scopes dept.css element selectors so they don't leak
+          into the redesigned (home) pages after client-side navigation */}
+      <div className="dept-root">
+        <DeptNav />
+        {children}
+        <DeptFooter />
+      </div>
       {/* jQuery carregado primeiro (blocking), plugins em sequência via DeptScripts */}
       <Script src="/js-dept/jquery-1.8.2.min.js" strategy="beforeInteractive" />
       <DeptScripts />

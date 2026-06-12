@@ -1,29 +1,33 @@
-/* ===== RESET ===== */
-h1,h2,h3,h4,h5,h6,address{margin:0;padding:0;border:0;font-style:normal;font-weight:normal;}
-div,blockquote,p,pre,ul,li,dl,dt,dd{margin:0;padding:0;border:0;}
-table,caption,th,td{font-style:normal;font-weight:normal;}
-hr{margin:0;padding:0;display:none;}
-iframe{margin:0;padding:0;border:0;}
-form,fieldset,input,button,select,optgroup,option,textarea,label,legend{margin:0;padding:0;}
-span,em,strong,dfn,code,samp,kbd,var,cite,abbr,acronym,q,br,ins,del,a,img,object{margin:0;padding:0;border:0;font-style:normal;font-weight:inherit;}
-ul{list-style-type:none;}
+/* ===== RESET =====
+   Element selectors are scoped under .dept-root via :where() (which keeps
+   their original specificity) so they don't leak into the redesigned pages
+   when this stylesheet stays loaded after client-side navigation. */
+.dept-root :where(h1,h2,h3,h4,h5,h6,address){margin:0;padding:0;border:0;font-style:normal;font-weight:normal;}
+.dept-root :where(div,blockquote,p,pre,ul,li,dl,dt,dd){margin:0;padding:0;border:0;}
+.dept-root :where(table,caption,th,td){font-style:normal;font-weight:normal;}
+.dept-root :where(hr){margin:0;padding:0;display:none;}
+.dept-root :where(iframe){margin:0;padding:0;border:0;}
+.dept-root :where(form,fieldset,input,button,select,optgroup,option,textarea,label,legend){margin:0;padding:0;}
+.dept-root :where(span,em,strong,dfn,code,samp,kbd,var,cite,abbr,acronym,q,br,ins,del,a,img,object){margin:0;padding:0;border:0;font-style:normal;font-weight:inherit;}
+.dept-root :where(ul){list-style-type:none;}
 
 /* ===== DEFAULT ===== */
 body{margin:0;padding:0;background-color:#fff;}
 html,body{height:100%;}
-body,h1,h2,h4,h5,h6,td,th,p,div,input,textarea,pre,ul,ol{
+.dept-root,
+.dept-root :where(h1,h2,h4,h5,h6,td,th,p,div,input,textarea,pre,ul,ol){
   font-family:'Noto Sans JP',sans-serif;
   line-height:1.2;
   font-size:13px;
   line-break:strict;
   color:#333333;
 }
-a{overflow:hidden;}
-a:link{color:#196bc7;text-decoration:none;}
-a:visited{color:#196bc7;text-decoration:none;}
-a:hover{color:#196bc7;text-decoration:underline;}
-a:active{color:#196bc7;text-decoration:none;}
-strong{font-weight:bold;}
+.dept-root :where(a){overflow:hidden;}
+.dept-root :where(a:link){color:#196bc7;text-decoration:none;}
+.dept-root :where(a:visited){color:#196bc7;text-decoration:none;}
+.dept-root :where(a:hover){color:#196bc7;text-decoration:underline;}
+.dept-root :where(a:active){color:#196bc7;text-decoration:none;}
+.dept-root :where(strong){font-weight:bold;}
 .crr{font-size:0;line-height:0;padding:0;margin:0;clear:both;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 .clearfix{display:inline-block;}
@@ -84,12 +88,12 @@ strong{font-weight:bold;}
 .photoR{float:right;border:#CCCCCC 1px solid;margin:0 0 10px 10px;padding:3px;background:#FFF;}
 .marT10{margin-top:10px;}
 .marB20{margin-bottom:20px;}
-a{font-size:13px;}
+.dept-root :where(a){font-size:13px;}
 
-h2{font-size:18px;font-weight:bold;color:#d89931;background:url(/images/h2.jpg) left bottom no-repeat;margin-bottom:10px;padding:0 0 10px 0;}
-h3{font-size:18px;font-weight:bold;padding:10px;clear:both;margin:10px 0;background:url(/images/h3.jpg) left center no-repeat;}
-h4{font-weight:bold;font-size:16px;}
-h5{font-weight:bold;margin:10px 0;}
+.dept-root :where(h2){font-size:18px;font-weight:bold;color:#d89931;background:url(/images/h2.jpg) left bottom no-repeat;margin-bottom:10px;padding:0 0 10px 0;}
+.dept-root :where(h3){font-size:18px;font-weight:bold;padding:10px;clear:both;margin:10px 0;background:url(/images/h3.jpg) left center no-repeat;}
+.dept-root :where(h4){font-weight:bold;font-size:16px;}
+.dept-root :where(h5){font-weight:bold;margin:10px 0;}
 
 .t_border{border-top:1px solid #D7D7D7;border-left:1px solid #D7D7D7;}
 .t_border td{border-right:1px solid #D7D7D7;border-bottom:1px solid #D7D7D7;padding:10px;vertical-align:top;}
@@ -271,7 +275,7 @@ h5{font-weight:bold;margin:10px 0;}
   .copy { float: none; width: 100%; text-align: left; }
 
   /* Global image guard */
-  img { max-width: 100%; height: auto; }
+  .dept-root :where(img) { max-width: 100%; height: auto; }
 }
 
 /* ===== NEWS (inline) ===== */
