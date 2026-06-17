@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // the legacy second achievements page now lives on /achievements
+      {
+        source: '/achievements02',
+        destination: '/achievements#achievements02',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

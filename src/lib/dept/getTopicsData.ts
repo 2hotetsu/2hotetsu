@@ -1,69 +1,46 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { TOPICS_ARCHIVE, sectionDate } from "./topicsArchive";
 
 export interface TopicsEntry {
-  id: string;       // e.g. " topics94-0"
+  id: string;       // e.g. "topics94-0"
   date: string;     // YYYY-MM-01
-  text: string;     // full Japanese text
+  text: string;     // full Japanese/English text
   anchor: string;   // "/topics#topics94"
   source: 'topics';
 }
 
 function stripHtml(html: string): string {
   return html
-    .replace(/<br\s*\/?>/gi, ' ')
-    .replace(/<[^>]+>/g, '')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/\s+/g, ' ')
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
+// Newest-first flat list of archive entries, used to pad the home news list.
 export function getTopicsData(limit = 20): TopicsEntry[] {
-  const filePath = join(process.cwd(), 'src', 'data', 'dept', 'topics.html');
-  const html = readFileSync(filePath, 'utf-8');
-
   const entries: TopicsEntry[] = [];
 
-  // Split the content section (after the sidebar) at each <h3 id="topicsXX">
-  const sectionRe = /<h3[^>]*id="(topics[\w_]+)"[^>]*>(\d{4})年(\d{1,2})月[^<]*<\/h3>([\s\S]*?)(?=<h3[^>]*id="topics|<\/div><!--#page_r-->|$)/g;
+  for (const section of TOPICS_ARCHIVE) {
+    const date = sectionDate(section.label);
+    if (!date) continue;
 
-  let sectionMatch: RegExpExecArray | null;
-  while ((sectionMatch = sectionRe.exec(html)) !== null) {
-    const anchor = sectionMatch[1];           // "topics94"
-    const year   = sectionMatch[2];           // "2026"
-    const month  = sectionMatch[3].padStart(2, '0'); // "04"
-    const body   = sectionMatch[4];
-
-    // Each <td colspan="2"> inside this section is one event
-    const tdRe = /<td[^>]*colspan[^>]*2[^>]*>([\s\S]*?)<\/td>/gi;
-    let tdMatch: RegExpExecArray | null;
-    let idx = 0;
-
-    while ((tdMatch = tdRe.exec(body)) !== null) {
-      const raw = stripHtml(tdMatch[1]);
-      if (!raw || raw.length < 5) continue;
-
-
-      const text = raw;
-
+    section.entries.forEach((entry, idx) => {
+      const text = stripHtml(entry.html);
+      if (!text || text.length < 5) return;
       entries.push({
-        id: `${anchor}-${idx}`,
-        date: `${year}-${month}-01`,
+        id: `${section.anchor}-${idx}`,
+        date,
         text,
-        anchor: `/topics#${anchor}`,
-        source: 'topics',
+        anchor: `/topics#${section.anchor}`,
+        source: "topics",
       });
-      idx++;
+    });
 
-      if (entries.length >= limit * 3) break; // parse enough then stop
-    }
-
-    if (entries.length >= limit * 3) break;
+    if (entries.length >= limit) break;
   }
 
-  // Already in document order (newest first), just cap
   return entries.slice(0, limit);
 }
