@@ -154,14 +154,14 @@ body {
 }
 
 .hm-brand-sup {
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   opacity: 0.8;
 }
 
 .hm-brand-main {
   font-family: var(--hm-mincho);
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.08em;
 }
@@ -182,7 +182,7 @@ body {
 }
 
 .hm-nav a {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.1em;
   padding: 6px 2px;
@@ -360,22 +360,11 @@ body {
 }
 
 .hm-hero-meta {
-  font-size: clamp(11px, 1.4vw, 13px);
+  font-size: clamp(11px, 1.4vw, 14px);
   letter-spacing: 0.22em;
-  margin: 0 0 18px;
+  margin: 0 0 10px;
 }
 
-.hm-hero-title {
-  font-family: var(--hm-mincho);
-  font-weight: 500;
-  font-size: clamp(25px, 5.2vw, 58px);
-  line-height: 1.6;
-  letter-spacing: 0.1em;
-  margin: 0 0 26px;
-  color: var(--hm-white);
-  background: none;
-  padding: 0;
-}
 
 .hm-hero-line {
   display: block;
@@ -393,17 +382,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: clamp(14px, 1.8vw, 17px);
+  font-size: clamp(14px, 1.8vw, 18px);
   letter-spacing: 0.18em;
   margin: 0;
 }
 
 .hm-hero-sub span {
   font-family: var(--hm-en);
-  font-size: clamp(11px, 1.3vw, 13px);
+  font-size: clamp(11px, 1.3vw, 14px);
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--hm-gold-soft);
+  line-height: 1;
 }
 
 /* slide progress bars */
