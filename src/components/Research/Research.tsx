@@ -7,7 +7,7 @@ export default async function Research() {
     const t = await getTranslations('Research');
     const locale = await getLocale();
     return (
-        <section id="research" className={styles.section}>
+        <section id="asmi" className={styles.section}>
             <div className={styles.sectionHeader}>
                 <h3 className={styles.sectionTitle}>{t('researchTitle')}</h3>
             </div>
@@ -20,7 +20,7 @@ export default async function Research() {
                         <p>{t('text1')}</p>
                         <p>{t('text2')}</p>
                         <p>{t('text3')}</p>
-                        <Link href={`/allergy/${locale}/research`} className={styles.joinButton}>
+                        <Link href={`/allergy/${locale}/asmi`} className={styles.joinButton}>
                             {t('joinButton')}
                         </Link>
                     </div>

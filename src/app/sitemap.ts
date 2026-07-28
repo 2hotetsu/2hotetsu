@@ -21,8 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${SITE_URL}/allergy/${locale}`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 1.0 },
       { url: `${SITE_URL}/allergy/${locale}/news`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.8 },
       { url: `${SITE_URL}/allergy/${locale}/highlights`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.8 },
-      { url: `${SITE_URL}/allergy/${locale}/research`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
-      { url: `${SITE_URL}/allergy/${locale}/research/news`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.7 },
+      { url: `${SITE_URL}/allergy/${locale}/asmi`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
+      { url: `${SITE_URL}/allergy/${locale}/asmi/news`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.7 },
     ]),
   ];
 
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     })),
     ...researchNews.map((r) => ({
-      url: `${SITE_URL}/allergy/${locale}/research/news/${r.slug}`,
+      url: `${SITE_URL}/allergy/${locale}/asmi/news/${r.slug}`,
       lastModified: toDate(r.publishedAt),
       changeFrequency: 'yearly' as const,
       priority: 0.6,

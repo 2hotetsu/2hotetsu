@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import DeptNews from "@/components/dept/DeptNews";
-import Link from "next/link";
 
 
 export default function Home() {
@@ -63,9 +62,11 @@ export default function Home() {
                 </a>
               </li>
               <li className="marT10">
-                <Link href="/allergy/ja" rel="noopener noreferrer">
+                {/* <a> e não <Link>: navegação soft mantém dept.css no documento
+                    e ela vaza nos estilos globais do site /allergy */}
+                <a href="/allergy/ja" rel="noopener noreferrer">
                   <Image src="/images/link03.jpg" alt="徳島大学病院 歯科用金属アレルギー外来" className="hoverImg" width={300} height={50} />
-                </Link>
+                </a>
               </li>
               <li>
                 <a href="http://www.tokushima-u.ac.jp/dent/" target="_blank" rel="noopener noreferrer">

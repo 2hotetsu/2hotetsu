@@ -12,7 +12,7 @@ const navKeys = [
   { key: 'articles' as const,     anchor: '#articles' },
   { key: 'news' as const,         anchor: '#news' },
   { key: 'highlights' as const,   anchor: '#highlights' },
-  { key: 'researchGroup' as const,anchor: '#research' },
+  { key: 'researchGroup' as const,anchor: '#asmi' },
   { key: 'access' as const,       anchor: '#access' },
 ];
 

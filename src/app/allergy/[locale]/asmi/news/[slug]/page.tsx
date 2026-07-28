@@ -24,14 +24,14 @@ export async function generateMetadata({
     openGraph: {
       title: `${post.title} ${suffix}`,
       type: 'article',
-      url: `${SITE_URL}/allergy/${locale}/research/news/${slug}`,
+      url: `${SITE_URL}/allergy/${locale}/asmi/news/${slug}`,
       ...(post.mainImage?.asset?.url && { images: [{ url: post.mainImage.asset.url }] }),
     },
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}/research/news/${slug}`,
+      canonical: `${SITE_URL}/allergy/${locale}/asmi/news/${slug}`,
       languages: {
-        ja: `${SITE_URL}/allergy/ja/research/news/${slug}`,
-        en: `${SITE_URL}/allergy/en/research/news/${slug}`,
+        ja: `${SITE_URL}/allergy/ja/asmi/news/${slug}`,
+        en: `${SITE_URL}/allergy/en/asmi/news/${slug}`,
       },
     },
   };
@@ -56,7 +56,7 @@ export default async function ResearchNewsDetailPage({
     <FadeIn>
       <PostDetail
         post={post}
-        backLink={`/allergy/${locale}/research/news`}
+        backLink={`/allergy/${locale}/asmi/news`}
         backText={`${t('backNews')}`}
       />
     </FadeIn>
