@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { extractYouTubeId } from '@/utils/youtube';
 import PdfCardPreviewNoSSR from '@/components/PdfPreview/PdfCardPreviewNoSSR';
 import pdfDownload from '@/img/icons/pdf.png'
+import { formatDate } from '@/lib/formatDate';
 
 type Post = {
   _id: string;
@@ -70,13 +71,7 @@ export default async function News({ params }: { params: Promise<{ locale: strin
                     </div>
                     <div className={styles.newsCardBody}>
                       <span className={styles.newsDate}>
-                        {post.publishedAt
-                          ? new Date(post.publishedAt).toLocaleDateString(locale, {
-                              year: 'numeric',
-                              month: '2-digit',
-                              day: '2-digit',
-                            })
-                          : ''}
+                        {formatDate(post.publishedAt)}
                       </span>
                       <h4>{post.title}</h4>
                     </div>

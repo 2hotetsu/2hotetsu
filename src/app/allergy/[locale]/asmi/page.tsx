@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import FadeIn from "@/components/FadeIn/FadeIn";
 import { SITE_URL } from '@/lib/siteConfig';
+import { formatMonthDay, formatYear } from '@/lib/formatDate';
 
 export async function generateMetadata({
   params,
@@ -45,7 +46,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
   const news = await client.fetch(researchNewsQuery, { locale });
 
   const groupedNews = news.slice(0, 10).reduce((acc: any, post: any) => {
-    const year = post.publishedAt ? new Date(post.publishedAt).getFullYear() : 'Unknown';
+    const year = formatYear(post.publishedAt, 'Unknown');
     if (!acc[year]) {
       acc[year] = [];
     }
@@ -162,12 +163,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
                         {groupedNews[year].map((post: any) => (
                           <li key={post._id} className={styles.newsItem}>
                             <span className={styles.newsDate}>
-                              {post.publishedAt 
-                                ? new Date(post.publishedAt).toLocaleDateString(locale, { 
-                                    month: '2-digit', 
-                                    day: '2-digit' 
-                                  }) 
-                                : '--/--'}
+                              {formatMonthDay(post.publishedAt, '--/--')}
                             </span>
                             <Link href={`/allergy/${locale}/asmi/news/${post.slug.current}`} className={styles.newsLink}>
                               {post.title}
