@@ -5,7 +5,7 @@ import { postBySlugQuery, postMetaBySlugQuery } from '@/sanity/lib/queries';
 import PostDetail from '@/components/PostDetail/PostDetail';
 import FadeIn from '@/components/FadeIn/FadeIn';
 import { notFound } from 'next/navigation';
-import { SITE_URL } from '@/lib/siteConfig';
+import { localeUrl } from '@/lib/siteConfig';
 
 export async function generateMetadata({
   params,
@@ -24,14 +24,14 @@ export async function generateMetadata({
     openGraph: {
       title: `${post.title} ${suffix}`,
       type: 'article',
-      url: `${SITE_URL}/allergy/${locale}/news/${slug}`,
+      url: localeUrl(locale, `/allergy/news/${slug}`),
       ...(post.mainImage?.asset?.url && { images: [{ url: post.mainImage.asset.url }] }),
     },
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}/news/${slug}`,
+      canonical: localeUrl(locale, `/allergy/news/${slug}`),
       languages: {
-        ja: `${SITE_URL}/allergy/ja/news/${slug}`,
-        en: `${SITE_URL}/allergy/en/news/${slug}`,
+        ja: localeUrl('ja', `/allergy/news/${slug}`),
+        en: localeUrl('en', `/allergy/news/${slug}`),
       },
     },
   };
@@ -56,7 +56,7 @@ export default async function NewsDetailPage({
     <FadeIn>
       <PostDetail
         post={post}
-        backLink={`/allergy/${locale}/news`}
+        backLink={'/allergy/news'}
         backText={`${t("backNews")} `}
       />
     </FadeIn>

@@ -15,11 +15,29 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
+    // The allergy site used to live at /allergy/ja and /allergy/en. Japanese
+    // is now the root (/allergy) and English takes the prefix (/en/allergy).
+    // These 301s preserve what is already indexed. `redirects` runs before
+    // the proxy, so next-intl never sees the old URLs.
     return [
-      // the legacy second achievements page now lives on /achievements
       {
-        source: '/achievements02',
-        destination: '/achievements#achievements02',
+        source: '/allergy/ja',
+        destination: '/allergy',
+        permanent: true,
+      },
+      {
+        source: '/allergy/ja/:path*',
+        destination: '/allergy/:path*',
+        permanent: true,
+      },
+      {
+        source: '/allergy/en',
+        destination: '/en/allergy',
+        permanent: true,
+      },
+      {
+        source: '/allergy/en/:path*',
+        destination: '/en/allergy/:path*',
         permanent: true,
       },
     ];

@@ -166,6 +166,22 @@ body {
   letter-spacing: 0.08em;
 }
 
+/* The brand block was sized for Japanese, which says the same thing in far
+   fewer glyphs. In English the department name alone wrapped to four lines at
+   20px and pushed the block out of the header, so shrink it there: the name
+   then fits two lines and the school one or two, inside the 84px header
+   (68px once scrolled). */
+:lang(en) .hm-brand-sup {
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+}
+:lang(en) .hm-brand-main {
+  font-size: 15px;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
 .hm-menu-open .hm-brand,
 .hm-header.is-menu-open .hm-brand {
   color: var(--hm-white);
@@ -207,6 +223,38 @@ body {
 }
 
 /* hamburger */
+.hm-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hm-lang {
+  position: relative;
+  z-index: 102;
+  padding: 5px 8px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.hm-lang:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+/* the <option> inherits the system background, not the transparent header */
+.hm-lang option {
+  color: var(--hm-ink);
+  background: var(--hm-white);
+}
+.hm-header.is-menu-open .hm-lang {
+  color: var(--hm-white);
+}
+
 .hm-menu-btn {
   display: none;
   position: relative;
@@ -1517,11 +1565,30 @@ body {
   }
 }
 
+/* "Achievements" and "Education" are far wider than 業績集 and 教育内容, so the
+   English nav crowds the brand out well before 1100px. Hand over to the
+   hamburger earlier rather than shrinking the department name any further. */
+@media (max-width: 1260px) {
+  :lang(en) .hm-nav {
+    display: none;
+  }
+  :lang(en) .hm-menu-btn {
+    display: flex;
+  }
+}
+
 @media (max-width: 720px) {
   .hm-brand-sup {
     font-size: 9px;
   }
   .hm-brand-main {
+    font-size: 16px;
+  }
+  /* the nav is gone by this width, so English gets the room back */
+  :lang(en) .hm-brand-sup {
+    font-size: 9px;
+  }
+  :lang(en) .hm-brand-main {
     font-size: 16px;
   }
 

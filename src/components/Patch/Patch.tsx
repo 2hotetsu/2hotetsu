@@ -3,7 +3,7 @@ import styles from "./Patch.module.css";
 import PatchFlow from '@/components/PatchFlow/PatchFlow';
 import Image from 'next/image';
 import patchImg from '@/img/patch/patch.png';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import pdfDownload from '@/img/icons/pdf.png'
 
 

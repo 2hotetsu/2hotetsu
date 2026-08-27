@@ -1,47 +1,48 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 
 const FOOTER_NAV = [
-  { href: "/staff", label: "スタッフ" },
-  { href: "/topics", label: "トピックス" },
-  { href: "/clinic", label: "診療内容" },
-  { href: "/research", label: "研究内容" },
-  { href: "/education", label: "教育内容" },
-  { href: "/recruit", label: "入局案内" },
-  { href: "/history", label: "教室沿革" },
-  { href: "/achievements", label: "業績集" },
-];
+  { href: "/staff", key: "staff" },
+  { href: "/topics", key: "topics" },
+  { href: "/clinic", key: "clinic" },
+  { href: "/research", key: "research" },
+  { href: "/education", key: "education" },
+  { href: "/recruit", key: "recruit" },
+  { href: "/history", key: "history" },
+  { href: "/achievements", key: "achievements" },
+] as const;
 
-export default function HomeFooter() {
+export default async function HomeFooter() {
+  const t = await getTranslations("Dept");
+
   return (
     <footer className="hm-footer">
       <div className="hm-footer-inner">
         <div className="hm-footer-brand">
-          <p className="hm-footer-sup">徳島大学大学院医歯薬学研究部　口腔科学部門　臨床歯学系</p>
-          <p className="hm-footer-name">顎機能咬合再建学分野</p>
-          <p className="hm-footer-en">
-            Department of Stomatognathic Function and Occlusal Reconstruction
-          </p>
+          <p className="hm-footer-sup">{t("brand.sup")}</p>
+          <p className="hm-footer-name">{t("brand.main")}</p>
+          {t("brand.en") && <p className="hm-footer-en">{t("brand.en")}</p>}
         </div>
 
         <div className="hm-footer-cols">
-          <nav className="hm-footer-nav" aria-label="フッターナビゲーション">
+          <nav className="hm-footer-nav" aria-label={t("nav.ariaFooter")}>
             <ul>
-              {FOOTER_NAV.map(({ href, label }) => (
+              {FOOTER_NAV.map(({ href, key }) => (
                 <li key={href}>
-                  <Link href={href}>{label}</Link>
+                  <Link href={href}>{t(`nav.${key}`)}</Link>
                 </li>
               ))}
             </ul>
           </nav>
 
           <div className="hm-footer-contact">
-            <p className="hm-footer-label">外来診療のお問合せ</p>
+            <p className="hm-footer-label">{t("footer.contactLabel")}</p>
             <p>
-              徳島大学病院 歯科（かみあわせ補綴科）
+              {t("footer.clinicName")}
               <br />
-              〒770-8504 徳島市蔵本町3-18-15
+              {t("footer.address")}
               <br />
-              TEL 088-633-7371
+              {t("footer.tel")}
             </p>
           </div>
         </div>
@@ -52,7 +53,7 @@ export default function HomeFooter() {
           &copy; Department of Stomatognathic Function and Occlusal Reconstruction,
           Tokushima University. All rights reserved.
         </small>
-        <a href="#top" className="hm-pagetop" aria-label="ページ上部へ戻る">
+        <a href="#top" className="hm-pagetop" aria-label={t("nav.pageTop")}>
           <span aria-hidden="true">↑</span>
         </a>
       </div>

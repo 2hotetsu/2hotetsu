@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { client } from '@/sanity/lib/client';
 import { articleTabsQuery } from '@/sanity/lib/queries';
 import styles from './Articles.module.css';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import pdfDownload from '@/img/icons/pdf.png';
 import ArticlesTabs from './ArticlesTabs';

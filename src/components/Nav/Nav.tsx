@@ -21,7 +21,7 @@ export default async function Nav() {
       <ul className={styles.navList}>
         {navKeys.map(({ key, anchor }) => (
           <li key={key}>
-            <a href={anchor ?? `/allergy/${locale}`} className={styles.navLink}>
+            <a href={anchor ?? '/allergy'} className={styles.navLink}>
               {t(key)}
             </a>
           </li>

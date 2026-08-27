@@ -1,6 +1,6 @@
 import { getTranslations, getLocale } from 'next-intl/server';
 import styles from "./Research.module.css";
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 
 export default async function Research() {
@@ -20,7 +20,7 @@ export default async function Research() {
                         <p>{t('text1')}</p>
                         <p>{t('text2')}</p>
                         <p>{t('text3')}</p>
-                        <Link href={`/allergy/${locale}/research`} className={styles.joinButton}>
+                        <Link href={'/allergy/research'} className={styles.joinButton}>
                             {t('joinButton')}
                         </Link>
                     </div>

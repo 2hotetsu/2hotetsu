@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { getDeptNews, getMonthAnchor } from "@/lib/dept/getDeptNews";
 import { getTopicsData, type TopicsEntry } from "@/lib/dept/getTopicsData";
 
@@ -17,6 +18,7 @@ function formatDate(dateStr: string): string {
 }
 
 export default async function HomeNews() {
+  const t = await getTranslations("Dept");
   const [sanityItems, topicsItems] = await Promise.all([
     getDeptNews(MAX_ITEMS),
     Promise.resolve(getTopicsData(MAX_ITEMS)),
@@ -40,7 +42,7 @@ export default async function HomeNews() {
   const combined = [...sanityEntries, ...topicsEntries.slice(0, remaining)];
 
   if (combined.length === 0) {
-    return <p className="hm-news-empty">新着情報はありません。</p>;
+    return <p className="hm-news-empty">{t("home.newsEmpty")}</p>;
   }
 
   return (

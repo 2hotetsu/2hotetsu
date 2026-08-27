@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useTranslations, useLocale } from 'next-intl';
 import styles from './MobileMenu.module.css';
 
@@ -53,7 +53,7 @@ export default function MobileMenu() {
             {navKeys.map(({ key, anchor }) => (
               <li key={key} className={styles.navItem}>
                 <Link
-                  href={anchor ?? `/allergy/${locale}`}
+                  href={anchor ?? '/allergy'}
                   className={styles.navLink}
                   onClick={closeMenu}
                 >

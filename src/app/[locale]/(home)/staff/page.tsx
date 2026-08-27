@@ -1,27 +1,40 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import PageHero from "@/components/home/PageHero";
+import HeadingSm from "@/components/home/HeadingSm";
 import HomeEffects from "@/components/home/HomeEffects";
-import { STAFF_SECTIONS, mailtoHref } from "@/data/dept/staff";
+import { getStaffSections, mailtoHref } from "@/data/dept/staff";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "スタッフ | 顎機能咬合再建学分野",
-  description:
-    "徳島大学大学院医歯薬学研究部　顎機能咬合再建学分野のスタッフ紹介ページです。",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Dept" });
+  return { title: t("staff.title"), description: t("meta.staffDesc") };
+}
 
-export default function Staff() {
-  const sections = STAFF_SECTIONS.filter((s) => s.members.length > 0);
+export default async function Staff({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Dept");
+
+  const sections = getStaffSections(locale as Locale).filter(
+    (s) => s.members.length > 0
+  );
 
   return (
     <main className="hm-main hm-subpage">
-      <PageHero
-        en="Staff"
-        title="スタッフ"
-        description="顎機能咬合再建学分野に所属するスタッフをご紹介します。"
-      />
+      <PageHero en="Staff" title={t("staff.title")} description={t("staff.desc")} />
 
-      <nav className="hm-anchor-nav" aria-label="職位別ナビゲーション">
+      <nav className="hm-anchor-nav" aria-label={t("staff.ariaNav")}>
         <ul>
           {sections.map(({ id, title }) => (
             <li key={id}>
@@ -34,10 +47,7 @@ export default function Staff() {
       <div className="hm-container hm-staff-body">
         {sections.map(({ id, title, en, members }) => (
           <section className="hm-staff-section" id={id} key={id}>
-            <header className="hm-heading-sm" data-reveal>
-              <h2>{title}</h2>
-              <span className="hm-heading-sm-en">{en}</span>
-            </header>
+            <HeadingSm title={title} en={en} />
             <div className="hm-staff-grid" data-reveal-group>
               {members.map((m) => (
                 <article className="hm-staff-card" key={m.name} data-reveal-item>

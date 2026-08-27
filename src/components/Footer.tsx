@@ -1,6 +1,6 @@
 import styles from './Footer.module.css';
 import { getTranslations, getLocale } from 'next-intl/server';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import logo from '@/img/logo-nav.png';
 
@@ -30,16 +30,16 @@ export default async function Footer() {
           <h4>{t('quickLinks')}</h4>
           <ul>
             <div className={styles.firstColumn}>
-              <li><Link href={`/allergy/${locale}/`}>{t('home')}</Link></li>
-              <li><Link href={`/allergy/${locale}/#symptoms`}>{t('symptoms')}</Link></li>
-              <li><Link href={`/allergy/${locale}/#patchTest`}>{t('patchTest')}</Link></li>
-              <li><Link href={`/allergy/${locale}/#articles`}>{t('articles')}</Link></li>
+              <li><Link href={'/allergy'}>{t('home')}</Link></li>
+              <li><Link href={'/allergy#symptoms'}>{t('symptoms')}</Link></li>
+              <li><Link href={'/allergy#patchTest'}>{t('patchTest')}</Link></li>
+              <li><Link href={'/allergy#articles'}>{t('articles')}</Link></li>
             </div>
             <div className={styles.secondColumn}>
-              <li><Link href={`/allergy/${locale}/#news`}>{t('news')}</Link></li>
-              <li><Link href={`/allergy/${locale}/#highlights`}>{t('highlights')}</Link></li>
-              <li><Link href={`/allergy/${locale}/research`}>{t('researchGroup')}</Link></li>
-              <li><Link href={`/allergy/${locale}/#access`}>{t('access')}</Link></li>
+              <li><Link href={'/allergy#news'}>{t('news')}</Link></li>
+              <li><Link href={'/allergy#highlights'}>{t('highlights')}</Link></li>
+              <li><Link href={'/allergy/research'}>{t('researchGroup')}</Link></li>
+              <li><Link href={'/allergy#access'}>{t('access')}</Link></li>
             </div>
           </ul>
         </div>

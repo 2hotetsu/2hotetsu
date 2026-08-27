@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_JP } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../../globals.css";
 import { routing } from "@/i18n/routing";
-import { SITE_URL } from "@/lib/siteConfig";
+import { localeUrl } from "@/lib/siteConfig";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -63,9 +61,10 @@ export async function generateMetadata({
       siteName: isJa ? "歯科用金属アレルギー外来 | 徳島大学病院" : "Dental Metal Allergy Clinic | Tokushima University Hospital",
     },
     alternates: {
+      canonical: localeUrl(locale, '/allergy'),
       languages: {
-        ja: `${SITE_URL}/allergy/ja`,
-        en: `${SITE_URL}/allergy/en`,
+        ja: localeUrl('ja', '/allergy'),
+        en: localeUrl('en', '/allergy'),
       },
     },
   };
@@ -79,21 +78,15 @@ export default async function AllergyLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
-  if (!["en", "ja"].includes(locale)) {
-    notFound();
-  }
   setRequestLocale(locale);
-  const messages = await getMessages();
 
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable}`}
     >
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <Header />
-        {children}
-        <Footer />
-      </NextIntlClientProvider>
+      <Header />
+      {children}
+      <Footer />
     </div>
   );
 }

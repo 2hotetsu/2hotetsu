@@ -4,7 +4,7 @@ import { highlightsQuery } from '@/sanity/lib/queries';
 import { urlForImage } from '@/sanity/lib/image';
 import styles from "./Highlights.module.css";
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { extractYouTubeId } from '@/utils/youtube';
 
 type Post = {
@@ -31,7 +31,7 @@ export default async function Highlights({ params }: { params: Promise<{ locale:
           <div className={styles.sectionAltContainer}>
             <div className={styles.sectionHeader}>
               <h3 className={styles.sectionTitle}>{t('highlightsTitle')}</h3>
-              <Link href={`/allergy/${locale}/highlights`} className={styles.viewAll}>
+              <Link href={'/allergy/highlights'} className={styles.viewAll}>
                 {t('viewAll')} &rarr;
               </Link>
             </div>
@@ -40,7 +40,7 @@ export default async function Highlights({ params }: { params: Promise<{ locale:
               <div className={styles.leftColumn}>
                 {posts.length > 0 ? (
                   posts.slice(0, 4).map((post) => (
-                    <Link key={post._id} href={`/allergy/${locale}/highlights/${post.slug.current}`} className={styles.leftCardLink}>
+                    <Link key={post._id} href={`/allergy/highlights/${post.slug.current}`} className={styles.leftCardLink}>
                       <article className={styles.leftCard}>
                          <div className={styles.leftCardImageWrapper}>
                            {post.mainImage?.asset ? (

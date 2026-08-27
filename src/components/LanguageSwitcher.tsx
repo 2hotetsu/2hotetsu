@@ -1,35 +1,41 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
-import styles from './Header.module.css';
+import { useTransition } from 'react';
+import { usePathname, useRouter } from '@/i18n/routing';
+import { routing } from '@/i18n/routing';
 
-export default function LanguageSwitcher() {
+/**
+ * Switches locale while staying on the current page.
+ *
+ * next-intl's `usePathname` returns the path with the locale prefix ALREADY
+ * stripped (/en/staff -> /staff), and `router.replace(path, {locale})` puts
+ * the prefix back following the `as-needed` rule: Japanese bare, English
+ * under /en. That is why one component serves both sites — it knows nothing
+ * about /allergy or about the department routes.
+ */
+export default function LanguageSwitcher({ className }: { className?: string }) {
   const locale = useLocale();
   const router = useRouter();
-  const pathname = usePathname(); // e.g. /allergy/ja/highlights
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
 
   function onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const nextLocale = event.target.value;
-
-    // pathname is like /allergy/ja/something
-    // Replace the locale segment: /allergy/ja → /allergy/en
-    const newPath = pathname.replace(
-      /^(\/allergy\/)(en|ja)(\/|$)/,
-      `$1${nextLocale}$3`
-    );
-
-    router.push(newPath);
+    const nextLocale = event.target.value as (typeof routing.locales)[number];
+    startTransition(() => {
+      router.replace(pathname, { locale: nextLocale });
+    });
   }
 
   return (
     <select
-      defaultValue={locale}
+      value={locale}
       onChange={onSelectChange}
-      className={styles.select}
+      disabled={isPending}
+      className={className}
     >
-      <option value="en">English</option>
       <option value="ja">日本語</option>
+      <option value="en">English</option>
     </select>
   );
 }

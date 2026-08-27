@@ -1,27 +1,42 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import PageHero from "@/components/home/PageHero";
 import HomeEffects from "@/components/home/HomeEffects";
-import { HISTORY_ITEMS } from "@/data/dept/history";
+import { getHistoryItems } from "@/data/dept/history";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "教室沿革 | 顎機能咬合再建学分野",
-  description:
-    "徳島大学大学院医歯薬学研究部　顎機能咬合再建学分野（旧 歯科補綴学第二講座）の沿革です。昭和54年の講座設置から現在までの歩みをご紹介します。",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Dept" });
+  return { title: t("history.title"), description: t("meta.historyDesc") };
+}
 
-export default function History() {
+export default async function History({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Dept");
+  const items = getHistoryItems(locale as Locale);
+
   return (
     <main className="hm-main hm-subpage">
       <PageHero
         en="History"
-        title="教室沿革"
-        description="昭和54年の歯科補綴学第二講座設置から現在までの歩みです。"
+        title={t("history.title")}
+        description={t("history.desc")}
       />
 
       <div className="hm-container hm-tl-body">
         <ol className="hm-timeline" data-reveal-group>
-          {HISTORY_ITEMS.map(({ year, era, text }, i) => {
-            const showYear = i === 0 || HISTORY_ITEMS[i - 1].year !== year;
+          {items.map(({ year, era, text }, i) => {
+            const showYear = i === 0 || items[i - 1].year !== year;
             return (
               <li className="hm-tl-item" key={`${era}-${text}`} data-reveal-item>
                 <div className="hm-tl-year">{showYear ? year : ""}</div>

@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import styles from "./Symptoms.module.css";
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import symptomsImg from '@/img/symptoms/symptoms.png';
 import pdfDownload from '@/img/icons/pdf.png'

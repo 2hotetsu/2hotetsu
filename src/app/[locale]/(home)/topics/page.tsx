@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import PageHero from "@/components/home/PageHero";
 import HomeEffects from "@/components/home/HomeEffects";
 import { getDeptNews, getMonthAnchor, getMonthLabel } from "@/lib/dept/getDeptNews";
-import { TOPICS_ARCHIVE, sectionYear } from "@/lib/dept/topicsArchive";
+import {
+  TOPICS_ARCHIVE,
+  sectionYear,
+  localizeSectionLabel,
+} from "@/lib/dept/topicsArchive";
 
-export const metadata: Metadata = {
-  title: "トピックス | 顎機能咬合再建学分野",
-  description:
-    "徳島大学大学院医歯薬学研究部　顎機能咬合再建学分野の活動記録・トピックスです。",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Dept" });
+  return { title: t("topics.title"), description: t("meta.topicsDesc") };
+}
 
 interface UiImage {
   src: string;
@@ -34,7 +43,7 @@ interface MonthBlock {
   entries: UiEntry[];
 }
 
-async function buildMonthBlocks(): Promise<MonthBlock[]> {
+async function buildMonthBlocks(locale: string): Promise<MonthBlock[]> {
   // recent, Sanity-managed entries grouped by month
   const sanityBlocks: MonthBlock[] = [];
   for (const item of await getDeptNews(200)) {
@@ -55,7 +64,7 @@ async function buildMonthBlocks(): Promise<MonthBlock[]> {
     } else {
       sanityBlocks.push({
         anchor,
-        label: getMonthLabel(item.date),
+        label: getMonthLabel(item.date, locale),
         year: parseInt(item.date.slice(0, 4), 10),
         entries: [entry],
       });
@@ -65,7 +74,7 @@ async function buildMonthBlocks(): Promise<MonthBlock[]> {
   // frozen archive converted from the legacy page
   const archiveBlocks: MonthBlock[] = TOPICS_ARCHIVE.map((section) => ({
     anchor: section.anchor,
-    label: section.label,
+    label: localizeSectionLabel(section.label, locale),
     year: sectionYear(section.label) ?? 0,
     entries: section.entries.map((entry, idx) => ({
       key: `${section.anchor}-${idx}`,
@@ -77,19 +86,23 @@ async function buildMonthBlocks(): Promise<MonthBlock[]> {
   return [...sanityBlocks, ...archiveBlocks];
 }
 
-export default async function Topics() {
-  const blocks = await buildMonthBlocks();
+export default async function Topics({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Dept");
+
+  const blocks = await buildMonthBlocks(locale);
   const years = [...new Set(blocks.map((b) => b.year))];
 
   return (
     <main className="hm-main hm-subpage">
-      <PageHero
-        en="Topics"
-        title="トピックス"
-        description="学会での受賞や入局、教室の出来事など、当分野の活動を記録しています。"
-      />
+      <PageHero en="Topics" title={t("topics.title")} description={t("topics.desc")} />
 
-      <nav className="hm-anchor-nav" aria-label="年別ナビゲーション">
+      <nav className="hm-anchor-nav" aria-label={t("topics.ariaNav")}>
         <ul>
           {years.map((year) => (
             <li key={year}>

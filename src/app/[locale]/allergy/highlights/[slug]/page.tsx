@@ -5,7 +5,7 @@ import { highlightBySlugQuery, highlightMetaBySlugQuery } from '@/sanity/lib/que
 import PostDetail from '@/components/PostDetail/PostDetail';
 import FadeIn from '@/components/FadeIn/FadeIn';
 import { notFound } from 'next/navigation';
-import { SITE_URL } from '@/lib/siteConfig';
+import { localeUrl } from '@/lib/siteConfig';
 
 export async function generateMetadata({
   params,
@@ -24,14 +24,14 @@ export async function generateMetadata({
     openGraph: {
       title: `${post.title} ${suffix}`,
       type: 'article',
-      url: `${SITE_URL}/allergy/${locale}/highlights/${slug}`,
+      url: localeUrl(locale, `/allergy/highlights/${slug}`),
       ...(post.mainImage?.asset?.url && { images: [{ url: post.mainImage.asset.url }] }),
     },
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}/highlights/${slug}`,
+      canonical: localeUrl(locale, `/allergy/highlights/${slug}`),
       languages: {
-        ja: `${SITE_URL}/allergy/ja/highlights/${slug}`,
-        en: `${SITE_URL}/allergy/en/highlights/${slug}`,
+        ja: localeUrl('ja', `/allergy/highlights/${slug}`),
+        en: localeUrl('en', `/allergy/highlights/${slug}`),
       },
     },
   };
@@ -56,7 +56,7 @@ export default async function HighlightDetailPage({
     <FadeIn>
       <PostDetail
         post={post}
-        backLink={`/allergy/${locale}/highlights`}
+        backLink={'/allergy/highlights'}
         backText={`${t("backHighlights")}`}
       />
     </FadeIn>

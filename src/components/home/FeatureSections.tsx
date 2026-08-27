@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import HeadingSm from "./HeadingSm";
 
 export interface FeatureImage {
   src: string;
@@ -35,10 +36,7 @@ export default function FeatureSections({ sections }: { sections: FeatureSection
           <div className="hm-feat-grid">
             <div className="hm-feat-text">
               <p className="hm-feat-no">{String(i + 1).padStart(2, "0")}</p>
-              <header className="hm-heading-sm">
-                <h2>{title}</h2>
-                <span className="hm-heading-sm-en">{en}</span>
-              </header>
+              <HeadingSm title={title} en={en} />
               {paragraphs.map((p) => (
                 <p className="hm-feat-p" key={p}>
                   {p}

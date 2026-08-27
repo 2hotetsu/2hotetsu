@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import gsap from "gsap";
 
 const SLIDE_SECONDS = 5;
@@ -13,6 +14,7 @@ export interface HeroSlide {
 }
 
 export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
+  const t = useTranslations("Dept");
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -96,7 +98,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       <div className="hm-hero-shade" />
 
       <div className="hm-hero-content">
-        <p className="hm-hero-meta">徳島大学大学院医歯薬学研究部　口腔科学部門　臨床歯学系</p>
+        <p className="hm-hero-meta">{t("brand.sup")}</p>
         {/* <h1 className="hm-hero-title">
           <span className="hm-hero-line">
             <span className="hm-hero-line-inner">噛む機能を、科学する。</span>
@@ -106,8 +108,10 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
           </span>
         </h1> */}
         <p className="hm-hero-sub">
-          顎機能咬合再建学分野
-          <span>Department of Stomatognathic Function and Occlusal Reconstruction</span>
+          {t("brand.main")}
+          {/* decorative English line: empty in the en locale, where it would
+              just repeat the name above */}
+          {t("brand.en") && <span>{t("brand.en")}</span>}
         </p>
       </div>
 

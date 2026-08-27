@@ -1,6 +1,6 @@
 "use client";
 
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import { urlForImage } from '@/sanity/lib/image';
 import { extractYouTubeId } from '@/utils/youtube';

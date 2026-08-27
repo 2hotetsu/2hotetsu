@@ -3,7 +3,7 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { urlForImage } from '@/sanity/lib/image';
 import styles from './Highlights.module.css';
 import { extractYouTubeId } from '@/utils/youtube';

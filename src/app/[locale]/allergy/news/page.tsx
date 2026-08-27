@@ -4,7 +4,7 @@ import { client } from '@/sanity/lib/client';
 import { postsQuery } from '@/sanity/lib/queries';
 import PostList from '@/components/PostList/PostList';
 import FadeIn from '@/components/FadeIn/FadeIn';
-import { SITE_URL } from '@/lib/siteConfig';
+import { localeUrl } from '@/lib/siteConfig';
 
 export async function generateMetadata({
   params,
@@ -19,10 +19,10 @@ export async function generateMetadata({
       ? '歯科用金属アレルギー外来の活動報告・お知らせ一覧です。'
       : 'News and activity reports from the Dental Metal Allergy Clinic.',
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}/news`,
+      canonical: localeUrl(locale, '/allergy/news'),
       languages: {
-        ja: `${SITE_URL}/allergy/ja/news`,
-        en: `${SITE_URL}/allergy/en/news`,
+        ja: localeUrl('ja', '/allergy/news'),
+        en: localeUrl('en', '/allergy/news'),
       },
     },
   };
@@ -39,7 +39,7 @@ export default async function NewsListPage({ params }: { params: Promise<{ local
       <PostList
         title={`${t('newsTitle')}`}
         items={posts}
-        basePath={`/allergy/${locale}/news`}
+        basePath={'/allergy/news'}
       />
     </FadeIn>
   );

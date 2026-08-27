@@ -1,23 +1,42 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import PageHero from "@/components/home/PageHero";
 import HomeEffects from "@/components/home/HomeEffects";
 import FeatureSections from "@/components/home/FeatureSections";
-import { RESEARCH_INTRO, RESEARCH_SECTIONS } from "@/data/dept/research";
+import { getResearchIntro, getResearchSections } from "@/data/dept/research";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "研究内容 | 顎機能咬合再建学分野",
-  description:
-    "徳島大学大学院医歯薬学研究部　顎機能咬合再建学分野の研究内容のご紹介です。顎運動測定器の開発、咬合可視化装置、睡眠ブラキシズム、歯科用金属アレルギー、口腔機能とストレス、三叉神経機能の解明などの研究を行っています。",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Dept" });
+  return { title: t("research.title"), description: t("meta.researchDesc") };
+}
 
-export default function Research() {
+export default async function Research({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Dept");
+  const sections = getResearchSections(locale as Locale);
+
   return (
     <main className="hm-main hm-subpage">
-      <PageHero en="Research" title="研究内容" description={RESEARCH_INTRO} />
+      <PageHero
+        en="Research"
+        title={t("research.title")}
+        description={getResearchIntro(locale as Locale)}
+      />
 
-      <nav className="hm-anchor-nav" aria-label="研究内容ナビゲーション">
+      <nav className="hm-anchor-nav" aria-label={t("research.ariaNav")}>
         <ul>
-          {RESEARCH_SECTIONS.map(({ id, title }) => (
+          {sections.map(({ id, title }) => (
             <li key={id}>
               <a href={`#${id}`}>{title}</a>
             </li>
@@ -25,7 +44,7 @@ export default function Research() {
         </ul>
       </nav>
 
-      <FeatureSections sections={RESEARCH_SECTIONS} />
+      <FeatureSections sections={sections} />
 
       <HomeEffects />
     </main>

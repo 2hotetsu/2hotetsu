@@ -1,40 +1,58 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import PageHero from "@/components/home/PageHero";
+import HeadingSm from "@/components/home/HeadingSm";
 import HomeEffects from "@/components/home/HomeEffects";
-import { EDUCATION_INTRO, EDUCATION_MATERIALS } from "@/data/dept/education";
+import { getEducationIntro, getEducationMaterials } from "@/data/dept/education";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "教育内容 | 顎機能咬合再建学分野",
-  description:
-    "徳島大学大学院医歯薬学研究部　顎機能咬合再建学分野の教育内容のご案内です。主に固定性義歯を用いた補綴治療についての教育を行っています。",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Dept" });
+  return { title: t("education.title"), description: t("meta.educationDesc") };
+}
 
-export default function Education() {
+export default async function Education({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Dept");
+  const materials = getEducationMaterials(locale as Locale);
+  const materialsTitle = t("education.materialsTitle");
+
   return (
     <main className="hm-main hm-subpage">
-      <PageHero en="Education" title="教育内容" description={EDUCATION_INTRO} />
+      <PageHero
+        en="Education"
+        title={t("education.title")}
+        description={getEducationIntro(locale as Locale)}
+      />
 
       <div className="hm-container hm-edu-body">
         <section data-reveal>
-          <header className="hm-heading-sm">
-            <h2>講義資料</h2>
-            <span className="hm-heading-sm-en">Lecture Materials</span>
-          </header>
-          <p className="hm-prose">
-            学生・教室員向けの講義資料を下記のページで公開しています。
-          </p>
+          <HeadingSm title={materialsTitle} en="Lecture Materials" />
+          <p className="hm-prose">{t("education.materialsText")}</p>
           <div className="hm-edu-link">
             <a
-              href={EDUCATION_MATERIALS.href}
+              href={materials.href}
               target="_blank"
               rel="noopener noreferrer"
               className="hm-link-card"
             >
-              <span className="hm-link-jp">{EDUCATION_MATERIALS.jp}</span>
-              <span className="hm-link-en">{EDUCATION_MATERIALS.en}</span>
+              <span className="hm-link-jp">{materialsTitle}</span>
+              {materialsTitle !== materials.en && (
+                <span className="hm-link-en">{materials.en}</span>
+              )}
               <span className="hm-link-mark" aria-hidden="true">↗</span>
             </a>
-            <p className="hm-edu-note">※ {EDUCATION_MATERIALS.note}</p>
+            <p className="hm-edu-note">※ {materials.note}</p>
           </div>
         </section>
       </div>

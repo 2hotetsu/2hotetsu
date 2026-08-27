@@ -67,8 +67,16 @@ export function getMonthAnchor(date: string): string {
   return `${MONTH_NAMES[parseInt(m, 10) - 1]}${y.slice(2)}`;
 }
 
-// e.g. "2026-06-15" -> "2026年6月"
-export function getMonthLabel(date: string): string {
+const MONTH_LABELS_EN = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+// e.g. "2026-06-15" -> "2026年6月" (ja) / "June 2026" (en)
+export function getMonthLabel(date: string, locale: string = "ja"): string {
   const [y, m] = date.split("-");
-  return `${y}年${parseInt(m, 10)}月`;
+  const month = parseInt(m, 10);
+  return locale === "en"
+    ? `${MONTH_LABELS_EN[month - 1]} ${y}`
+    : `${y}年${month}月`;
 }

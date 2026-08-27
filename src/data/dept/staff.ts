@@ -1,6 +1,12 @@
 // Staff roster, extracted from the legacy staff.html.
 // Emails keep the full-width ＠ for display (anti-scraping); the mailto
 // href is derived by normalising it back to @.
+//
+// Romanised names follow the department's own bilingual news posts
+// (data/dept/topics-archive.json) wherever those name the person in English.
+
+import type { Locale } from "@/i18n/routing";
+import { type L, pick } from "./i18n";
 
 export interface StaffMember {
   name: string;
@@ -19,29 +25,133 @@ export interface StaffSection {
   members: StaffMember[];
 }
 
+interface RawStaffMember {
+  name: L;
+  img: string;
+  note?: L;
+  specialties: L[];
+  email?: string;
+}
+
+interface RawStaffSection {
+  id: string;
+  title: string;
+  en: string;
+  members: RawStaffMember[];
+}
+
 const NO_IMAGE = "/images/staff/noimage.jpg";
 
-export const STAFF_SECTIONS: StaffSection[] = [
+/** Qualifications shared across members — declared once so the English
+ *  wording of a society's certification stays identical everywhere. */
+const Q = {
+  prostho: {
+    ja: "補綴歯科専門医",
+    en: "Board-Certified Prosthodontist",
+  },
+  prosthoSpecialist: {
+    ja: "日本補綴歯科学会専門医",
+    en: "Board-Certified Specialist, Japan Prosthodontic Society",
+  },
+  prosthoCertified: {
+    ja: "日本補綴歯科学会認定医",
+    en: "Certified Member, Japan Prosthodontic Society",
+  },
+  prosthodontics: {
+    ja: "歯科補綴学",
+    en: "Prosthodontics",
+  },
+  generalDentistry: {
+    ja: "一般歯科",
+    en: "General Dentistry",
+  },
+  tmjInstructor: {
+    ja: "日本顎関節学会指導医",
+    en: "Certified Instructor, Japanese Society for the Temporomandibular Joint",
+  },
+  tmjCertified: {
+    ja: "日本顎関節学会認定医",
+    en: "Certified Member, Japanese Society for the Temporomandibular Joint",
+  },
+  orofacialPainInstructor: {
+    ja: "日本口腔顔面痛学会指導医",
+    en: "Certified Instructor, Japanese Society of Orofacial Pain",
+  },
+  oralRehabInstructor: {
+    ja: "日本口腔リハビリテーション学会指導医",
+    en: "Certified Instructor, Japanese Society of Oral Rehabilitation",
+  },
+  oralRehabCertified: {
+    ja: "日本口腔リハビリテーション学会認定医",
+    en: "Certified Member, Japanese Society of Oral Rehabilitation",
+  },
+  sportsDentist: {
+    ja: "日本スポーツ協会公認スポーツデンティスト",
+    en: "Sports Dentist certified by the Japan Sport Association",
+  },
+  painFoundation: {
+    ja: "日本痛み財団マネージャー",
+    en: "Manager, Japan Pain Foundation",
+  },
+  oralSurgery: {
+    ja: "日本口腔外科学会専門医",
+    en: "Board-Certified Specialist, Japanese Society of Oral and Maxillofacial Surgeons",
+  },
+  stomatological: {
+    ja: "日本口腔科学会認定医・指導医",
+    en: "Certified Member and Instructor, Japanese Stomatological Society",
+  },
+  chemotherapy: {
+    ja: "日本化学療法学会抗菌化学療法認定歯科医師",
+    en: "Certified Dentist in Antimicrobial Chemotherapy, Japanese Society of Chemotherapy",
+  },
+  infectionControl: {
+    ja: "ICD制度協議会インフェクションコントロールドクター",
+    en: "Infection Control Doctor, ICD Board",
+  },
+  acls: {
+    ja: "日本ACLS協会ACLSプロバイダー",
+    en: "ACLS Provider, Japan ACLS Association",
+  },
+  dysphagia: {
+    ja: "日本摂食嚥下リハビリテーション学会認定士",
+    en: "Certified Specialist, Japanese Society of Dysphagia Rehabilitation",
+  },
+  parkinson: {
+    ja: "日本パーキンソン病・運動障害疾患学会パーキンソン病療養指導士",
+    en: "Certified Parkinson's Disease Care Educator, Japanese Society of Parkinson's Disease and Movement Disorders",
+  },
+  mechatronics: {
+    ja: "メカトロニクス",
+    en: "Mechatronics",
+  },
+  biomedicalEngineering: {
+    ja: "生体医工学（顎口腔系機能）",
+    en: "Biomedical Engineering (Stomatognathic Function)",
+  },
+} satisfies Record<string, L>;
+
+const SECTIONS: RawStaffSection[] = [
   {
     id: "staff01",
     title: "教授",
     en: "Professor",
     members: [
       {
-        name: "松香 芳三",
+        name: { ja: "松香 芳三", en: "Yoshizo Matsuka" },
         img: "/images/staff/matuka.jpg",
         specialties: [
-          "補綴歯科専門医",
-          "日本顎関節学会指導医",
-          "日本口腔顔面痛学会指導医",
-          "日本口腔リハビリテーション学会指導医",
+          Q.prostho,
+          Q.tmjInstructor,
+          Q.orofacialPainInstructor,
+          Q.oralRehabInstructor,
         ],
         email: "matsuka＠tokushima-u.ac.jp",
       },
       {
-        name: "細木 真紀",
+        name: { ja: "細木 真紀", en: "Maki Hosoki" },
         img: "/images/staff/Hosoki 1.jpg",
-        specialties: ["補綴歯科専門医", "日本顎関節学会認定医"],
+        specialties: [Q.prostho, Q.tmjCertified],
         email: "hosoki＠tokushima-u.ac.jp",
       },
     ],
@@ -52,9 +162,9 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Associate Professor",
     members: [
       {
-        name: "大島 正充",
+        name: { ja: "大島 正充", en: "Masamitsu Oshima" },
         img: "/images/staff/o_shima.jpg",
-        specialties: ["補綴歯科専門医"],
+        specialties: [Q.prostho],
         email: "m-oshima＠tokushima-u.ac.jp",
       },
     ],
@@ -65,13 +175,9 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Lecturer",
     members: [
       {
-        name: "鈴木 善貴",
+        name: { ja: "鈴木 善貴", en: "Yoshitaka Suzuki" },
         img: "/images/staff/suzuki.jpg",
-        specialties: [
-          "補綴歯科専門医",
-          "日本口腔リハビリテーション学会認定医",
-          "日本スポーツ協会公認スポーツデンティスト",
-        ],
+        specialties: [Q.prostho, Q.oralRehabCertified, Q.sportsDentist],
         email: "yosuzuki＠tokushima-u.ac.jp",
       },
     ],
@@ -82,38 +188,34 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Assistant Professor",
     members: [
       {
-        name: "井上 美穂",
+        name: { ja: "井上 美穂", en: "Miho Inoue" },
         img: "/images/staff/inoue.jpg",
-        specialties: ["歯科補綴学", "日本痛み財団マネージャー"],
+        specialties: [Q.prosthodontics, Q.painFoundation],
         email: "inoue.miho＠tokushima-u.ac.jp",
       },
       {
-        name: "生田目 大介",
+        name: { ja: "生田目 大介", en: "Daisuke Ikutame" },
         img: "/images/staff/ikutame 1.jpg",
-        specialties: ["歯科補綴学", "日本痛み財団マネージャー"],
+        specialties: [Q.prosthodontics, Q.painFoundation],
         email: "c000030613＠tokushima-u.ac.jp",
       },
       {
-        name: "小池 一幸",
+        name: { ja: "小池 一幸", en: "Kazuyuki Koike" },
         img: "/images/staff/koike.jpg",
         specialties: [
-          "歯科補綴学",
-          "日本口腔外科学会専門医",
-          "日本口腔科学会認定医・指導医",
-          "日本化学療法学会抗菌化学療法認定歯科医師",
-          "ICD制度協議会インフェクションコントロールドクター",
-          "日本ACLS協会ACLSプロバイダー",
+          Q.prosthodontics,
+          Q.oralSurgery,
+          Q.stomatological,
+          Q.chemotherapy,
+          Q.infectionControl,
+          Q.acls,
         ],
         email: "koike.kazuyuki＠tokushima-u.ac.jp",
       },
       {
-        name: "新開 瑞希",
+        name: { ja: "新開 瑞希", en: "Mizuki Shinkai" },
         img: "/images/staff/shinkai.jpg",
-        specialties: [
-          "歯科補綴学",
-          "日本摂食嚥下リハビリテーション学会認定士",
-          "日本パーキンソン病・運動障害疾患学会パーキンソン病療養指導士",
-        ],
+        specialties: [Q.prosthodontics, Q.dysphagia, Q.parkinson],
         email: "c000033797＠tokushima-u.ac.jp",
       },
     ],
@@ -124,16 +226,19 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Research Fellow",
     members: [
       {
-        name: "藤村 哲也",
+        name: { ja: "藤村 哲也", en: "Tetsuya Fujimura" },
         img: "/images/staff/fujimura.jpg",
-        note: "徳島文理大学 理工学部 電子情報工学科 前教授",
-        specialties: ["メカトロニクス", "生体医工学（顎口腔系機能）"],
+        note: {
+          ja: "徳島文理大学 理工学部 電子情報工学科 前教授",
+          en: "Former Professor, Department of Electronic and Information Engineering, Faculty of Science and Engineering, Tokushima Bunri University",
+        },
+        specialties: [Q.mechatronics, Q.biomedicalEngineering],
         email: "fujimura.tetsuya＠tokushima-u.ac.jp",
       },
       {
-        name: "田島 登誉子",
+        name: { ja: "田島 登誉子", en: "Toyoko Tajima" },
         img: "/images/staff/tajima.jpg",
-        specialties: ["日本補綴歯科学会専門医"],
+        specialties: [Q.prosthoSpecialist],
         email: "toyokosatsuma＠gmail.com",
       },
     ],
@@ -144,21 +249,21 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Clinical Staff",
     members: [
       {
-        name: "宮城 麻友",
+        name: { ja: "宮城 麻友", en: "Mayu Miyagi" },
         img: "/images/staff/ueda.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "ueda.mayu＠tokushima-u.ac.jp",
       },
       {
-        name: "吉原 靖智",
+        name: { ja: "吉原 靖智", en: "Yasutomo Yoshihara" },
         img: "/images/staff/yoshihara.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "c301751014＠tokushima-u.ac.jp",
       },
       {
-        name: "谷脇 竜弥",
+        name: { ja: "谷脇 竜弥", en: "Tatsuya Taniwaki" },
         img: "/images/staff/taniwaki.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "taniwaki.tatsuya＠tokushima-u.ac.jp",
       },
     ],
@@ -169,9 +274,9 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Clinical Trainee",
     members: [
       {
-        name: "後藤田 茉子",
+        name: { ja: "後藤田 茉子", en: "Mako Gotoda" },
         img: "/images/staff/gotouda.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "m.gotoda＠tokushima-u.ac.jp",
       },
     ],
@@ -182,15 +287,15 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Clinical Support Dentist",
     members: [
       {
-        name: "岩浅 匠真",
+        name: { ja: "岩浅 匠真", en: "Takuma Iwasa" },
         img: "/images/staff/iwasa.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "c000025985＠tokushima-u.ac.jp",
       },
       {
-        name: "清水 朱里",
+        name: { ja: "清水 朱里", en: "Akari Shimizu" },
         img: "/images/staff/shimizu.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "c000031794＠tokushima-u.ac.jp",
       },
     ],
@@ -201,27 +306,30 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Graduate Student",
     members: [
       {
-        name: "Fangyuan Zhang",
+        name: { ja: "Fangyuan Zhang", en: "Fangyuan Zhang" },
         img: "/images/staff/fangyuan.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "dentist_zhang1999＠163.com",
       },
       {
-        name: "渡邊 亮友",
+        name: { ja: "渡邊 亮友", en: "Akitomo Watanabe" },
         img: "/images/staff/watanabe.jpg",
-        specialties: ["日本補綴歯科学会認定医"],
+        specialties: [Q.prosthoCertified],
         email: "watanabe.akitomo＠tokushima-u.ac.jp",
       },
       {
-        name: "Fannisa Afrilyana Ulzanah",
+        name: {
+          ja: "Fannisa Afrilyana Ulzanah",
+          en: "Fannisa Afrilyana Ulzanah",
+        },
         img: "/images/staff/fannisa.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "ulzanahafril＠gmail.com",
       },
       {
-        name: "Yaozheng Wang",
+        name: { ja: "Yaozheng Wang", en: "Yaozheng Wang" },
         img: "/images/staff/yaozheng.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "wang.yz-0712＠outlook.com",
       },
     ],
@@ -234,9 +342,9 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Research Student",
     members: [
       {
-        name: "Vaishnavi Vijay Fulari",
+        name: { ja: "Vaishnavi Vijay Fulari", en: "Vaishnavi Vijay Fulari" },
         img: "/images/staff/vaishnavi.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "vaishnavifulari＠gmail.com",
       },
     ],
@@ -247,7 +355,7 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Technical Staff",
     members: [
       {
-        name: "佐々木 英子",
+        name: { ja: "佐々木 英子", en: "Eiko Sasaki" },
         img: "/images/staff/sasaki.jpg",
         specialties: [],
         email: "sasaki.eiko＠tokushima-u.ac.jp",
@@ -259,14 +367,30 @@ export const STAFF_SECTIONS: StaffSection[] = [
     title: "非常勤講師",
     en: "Part-time Lecturer",
     members: [
-      { name: "小川 匠", img: NO_IMAGE, specialties: ["歯科補綴学"] },
-      { name: "窪木 拓男", img: NO_IMAGE, specialties: ["歯科補綴学"] },
-      { name: "西川 啓介", img: NO_IMAGE, specialties: ["歯科補綴学"] },
-      { name: "坂東 永一", img: NO_IMAGE, specialties: ["歯科補綴学"] },
       {
-        name: "板東 伸幸",
+        name: { ja: "小川 匠", en: "Takumi Ogawa" },
+        img: NO_IMAGE,
+        specialties: [Q.prosthodontics],
+      },
+      {
+        name: { ja: "窪木 拓男", en: "Takuo Kuboki" },
+        img: NO_IMAGE,
+        specialties: [Q.prosthodontics],
+      },
+      {
+        name: { ja: "西川 啓介", en: "Keisuke Nishikawa" },
+        img: NO_IMAGE,
+        specialties: [Q.prosthodontics],
+      },
+      {
+        name: { ja: "坂東 永一", en: "Eiichi Bando" },
+        img: NO_IMAGE,
+        specialties: [Q.prosthodontics],
+      },
+      {
+        name: { ja: "板東 伸幸", en: "Nobuyuki Bando" },
         img: "/images/staff/bando.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "info＠bandodental.jp",
       },
     ],
@@ -277,27 +401,46 @@ export const STAFF_SECTIONS: StaffSection[] = [
     en: "Registered Trainee",
     members: [
       {
-        name: "中川 敬史",
+        name: { ja: "中川 敬史", en: "Takashi Nakagawa" },
         img: NO_IMAGE,
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "nkc0811＠icloud.com",
       },
       {
-        name: "鈴木 規之",
+        name: { ja: "鈴木 規之", en: "Noriyuki Suzuki" },
         img: "/images/staff/suzuki02.jpg",
-        specialties: ["一般歯科"],
+        specialties: [Q.generalDentistry],
         email: "ufo1980shadou＠gmail.com",
       },
       {
-        name: "木下 直人",
+        name: { ja: "木下 直人", en: "Naoto Kinoshita" },
         img: "/images/staff/kinoshita.jpg",
-        specialties: ["歯科補綴学"],
+        specialties: [Q.prosthodontics],
         email: "showtime100803＠msn.com",
       },
-      { name: "山内 英嗣", img: NO_IMAGE, specialties: ["歯科補綴学"] },
+      {
+        name: { ja: "山内 英嗣", en: "Eiji Yamauchi" },
+        img: NO_IMAGE,
+        specialties: [Q.prosthodontics],
+      },
     ],
   },
 ];
+
+export const getStaffSections = (locale: Locale): StaffSection[] =>
+  SECTIONS.map(({ id, title, en, members }) => ({
+    id,
+    // the position label already existed in both languages on the old page
+    title: locale === "en" ? en : title,
+    en,
+    members: members.map(({ name, img, note, specialties, email }) => ({
+      name: pick(name, locale),
+      img,
+      ...(note && { note: pick(note, locale) }),
+      specialties: specialties.map((s) => pick(s, locale)),
+      ...(email && { email }),
+    })),
+  }));
 
 /** "name＠domain" (display form) → "mailto:name@domain" */
 export function mailtoHref(email: string): string {

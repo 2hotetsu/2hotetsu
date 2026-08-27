@@ -126,7 +126,7 @@
     "backHighlights": "Back to Highlights",
     "backNews": "Back to News"
   },
-  "Read":{
+  "Read": {
     "readMore": "Read More",
     "viewAll": "View All"
   },
@@ -183,5 +183,110 @@
     "officeAddress": "3-18-15 Kuramoto-cho, Tokushima City, Tokushima 770-8504, Japan",
     "officeContact": "Contact:",
     "noNews": "No research news available"
+  },
+  "Dept": {
+    "brand": {
+      "sup": "Tokushima University Graduate School of Biomedical Sciences",
+      "main": "Department of Stomatognathic Function and Occlusal Reconstruction",
+      "en": ""
+    },
+    "nav": {
+      "home": "Home",
+      "staff": "Staff",
+      "topics": "Topics",
+      "clinic": "Clinic",
+      "research": "Research",
+      "education": "Education",
+      "recruit": "Recruit",
+      "history": "History",
+      "achievements": "Achievements",
+      "ariaMain": "Main navigation",
+      "ariaFooter": "Footer navigation",
+      "ariaAnchor": "In-page navigation",
+      "menuOpen": "Open menu",
+      "menuClose": "Close menu",
+      "pageTop": "Back to top of page",
+      "languageLabel": "Language"
+    },
+    "home": {
+      "greetingTitle": "Greeting",
+      "greetingText": "The Department of Stomatognathic Function and Occlusal Reconstruction belongs to the field of prosthodontics — the restoration of teeth that have been badly damaged or lost, using crowns, dentures and similar appliances. Losing teeth makes food harder to eat and speech harder to form, and it disrupts everyday life. It hardly needs saying that eating is fundamental to human life, and that eating well matters a great deal. With that in mind, our department pursues research into how lost teeth can be restored, how the jaw moves, how grinding occurs during the night, what metal allergy involves, and how temporomandibular disorders and orofacial pain should be diagnosed and treated — always working to translate that research into treatment. We hope this work, in the laboratory and in the clinic alike, will help people chew well and so contribute to human wellbeing. We also aim to provide the most current treatment available, working together with other departments and specialist clinics at Tokushima University Hospital. Our staff are committed as one to patient-centred care founded on informed consent, and to prosthodontic treatment of the highest quality.",
+      "greetingRole": "Professor, Stomatognathic Function and Occlusal Reconstruction",
+      "greetingName": "Yoshizo Matsuka",
+      "greetingPhotoAlt": "Yoshizo Matsuka, Professor of Stomatognathic Function and Occlusal Reconstruction",
+      "newsTitle": "News",
+      "newsMore": "View all",
+      "newsEmpty": "There is no news at the moment.",
+      "deptTitle": "Department",
+      "linksTitle": "Related Links",
+      "cardStaff": "Meet the professors and everyone else who makes up the department.",
+      "cardClinic": "The treatments we provide at the Occlusion and Prosthodontics Clinic, and our specialist clinics.",
+      "cardResearch": "Our research into jaw function, occlusion and orofacial pain.",
+      "cardEducation": "How we teach, from undergraduate courses through to graduate study.",
+      "cardRecruit": "For those considering joining us — training and career information.",
+      "cardHistory": "The department's path from its founding to the present day.",
+      "linkHospital": "Tokushima University Hospital",
+      "linkAllergy": "Dental Metal Allergy Clinic",
+      "linkDentistry": "Faculty of Dentistry, Tokushima University"
+    },
+    "staff": {
+      "title": "Staff",
+      "desc": "The people who make up the Department of Stomatognathic Function and Occlusal Reconstruction.",
+      "ariaNav": "Navigation by position"
+    },
+    "clinic": {
+      "title": "Clinic",
+      "ariaNav": "Treatment navigation",
+      "ctaTitle": "Outpatient Enquiries",
+      "ctaName": "Tokushima University Hospital — Dentistry (Occlusion and Prosthodontics Clinic)",
+      "ctaAddr": "3-18-15 Kuramoto-cho, Tokushima 770-8504, Japan"
+    },
+    "research": {
+      "title": "Research",
+      "ariaNav": "Research navigation"
+    },
+    "education": {
+      "title": "Education",
+      "materialsTitle": "Lecture Materials",
+      "materialsText": "Lecture materials for students and department members are published on the page below."
+    },
+    "recruit": {
+      "title": "Recruit",
+      "qaTitle": "For Prospective Members"
+    },
+    "history": {
+      "title": "History",
+      "desc": "Our path from the founding of the Second Department of Prosthodontics in 1979 to the present day."
+    },
+    "topics": {
+      "title": "Topics",
+      "desc": "A record of what we do — conference awards, new members and life in the department.",
+      "ariaNav": "Navigation by year"
+    },
+    "achievements": {
+      "title": "Achievements",
+      "desc": "A list of the department's academic papers and research grants.",
+      "ariaNav": "Achievements navigation",
+      "papers": "Academic Papers",
+      "grants": "Research Grants"
+    },
+    "footer": {
+      "contactLabel": "Outpatient Enquiries",
+      "clinicName": "Tokushima University Hospital — Dentistry (Occlusion and Prosthodontics Clinic)",
+      "address": "3-18-15 Kuramoto-cho, Tokushima 770-8504, Japan",
+      "tel": "TEL +81-88-633-7371"
+    },
+    "meta": {
+      "homeTitle": "Department of Stomatognathic Function and Occlusal Reconstruction — Tokushima University",
+      "homeDesc": "The Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University Graduate School of Biomedical Sciences. We research the restoration of lost teeth, mandibular movement, bruxism, metal allergy, sleep apnoea, temporomandibular disorders and orofacial pain, and work to turn that research into treatment.",
+      "staffDesc": "Staff of the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University Graduate School of Biomedical Sciences.",
+      "clinicDesc": "Treatment at Tokushima University Hospital, Dentistry (Occlusion and Prosthodontics Clinic): crowns and bridges, removable dentures, implant dentures, maxillofacial prostheses, dental metal allergy, oral appliances for sleep apnoea, and temporomandibular disorders and orofacial pain.",
+      "researchDesc": "Research at the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University: jaw movement trackers, occlusal visualisation devices, sleep bruxism, dental metal allergy, oral function and stress, and trigeminal nerve function.",
+      "educationDesc": "Education at the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University. We teach prosthodontic treatment based mainly on fixed prostheses.",
+      "recruitDesc": "Information for those wishing to join the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University, with questions and answers on research, clinical work, the duties of clinical fellows and departmental events.",
+      "historyDesc": "The history of the Department of Stomatognathic Function and Occlusal Reconstruction (formerly the Second Department of Prosthodontics), Tokushima University, from its founding in 1979 to the present day.",
+      "topicsDesc": "Topics and a record of activities at the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University.",
+      "achievementsDesc": "Achievements of the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University: a list of academic papers and research grants."
+    }
   }
 }

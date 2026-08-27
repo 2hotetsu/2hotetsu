@@ -11,7 +11,7 @@ import News from '@/components/News/News';
 import Highlights from '@/components/Highlights/Highlights';
 import Research from '@/components/Research/Research';
 import Access from '@/components/Access/Access';
-import { SITE_URL } from '@/lib/siteConfig';
+import { localeUrl } from '@/lib/siteConfig';
 
 export async function generateMetadata({
   params,
@@ -23,14 +23,14 @@ export async function generateMetadata({
 
   return {
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}`,
+      canonical: localeUrl(locale, '/allergy'),
       languages: {
-        ja: `${SITE_URL}/allergy/ja`,
-        en: `${SITE_URL}/allergy/en`,
+        ja: localeUrl('ja', '/allergy'),
+        en: localeUrl('en', '/allergy'),
       },
     },
     openGraph: {
-      url: `${SITE_URL}/allergy/${locale}`,
+      url: localeUrl(locale, '/allergy'),
       title: isJa
         ? '歯科用金属アレルギー外来 | 徳島大学病院'
         : 'Dental Metal Allergy Clinic | Tokushima University Hospital',
@@ -89,7 +89,7 @@ const clinicJsonLd = (locale: string) => ({
     locale === 'ja'
       ? '歯科用金属が原因のアレルギー症状の診断・パッチテスト・治療を行う専門外来'
       : 'Specialized outpatient clinic for diagnosis, patch testing, and treatment of allergic reactions caused by dental metals',
-  url: `${SITE_URL}/allergy/${locale}`,
+  url: localeUrl(locale, '/allergy'),
   telephone: '088-633-7371',
   address: {
     '@type': 'PostalAddress',
@@ -294,7 +294,7 @@ const patchTestJsonLd = (locale: string) => ({
       locale === 'ja'
         ? '徳島大学病院 歯科用金属アレルギー外来'
         : 'Tokushima University Hospital Dental Metal Allergy Clinic',
-    url: `${SITE_URL}/allergy/${locale}`,
+    url: localeUrl(locale, '/allergy'),
   },
   citation: {
     '@type': 'ScholarlyArticle',

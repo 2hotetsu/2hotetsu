@@ -5,7 +5,7 @@ import { urlForImage } from '@/sanity/lib/image';
 import styles from "./News.module.css";
 import Image from 'next/image';
 import newsImg from '@/img/news/news.png';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { extractYouTubeId } from '@/utils/youtube';
 import PdfCardPreviewNoSSR from '@/components/PdfPreview/PdfCardPreviewNoSSR';
 import pdfDownload from '@/img/icons/pdf.png'
@@ -35,12 +35,12 @@ export default async function News({ params }: { params: Promise<{ locale: strin
         <section id="news" className={styles.section}>
           <div className={styles.sectionHeader}>
             <h3 className={styles.sectionTitle}>{t('newsTitle')}</h3>
-            <Link href={`/allergy/${locale}/news`} className={styles.viewAll}>{t('viewAll')} &rarr;</Link>
+            <Link href={'/allergy/news'} className={styles.viewAll}>{t('viewAll')} &rarr;</Link>
           </div>
           <div className={styles.newsGrid}>
             {posts.length > 0 ? (
               posts.slice(0, 3).map((post) => (
-                <Link key={post._id} href={`/allergy/${locale}/news/${post.slug.current}`} className={styles.newsCardLink}>
+                <Link key={post._id} href={`/allergy/news/${post.slug.current}`} className={styles.newsCardLink}>
                   <article className={styles.newsCard}>
                     <div className={styles.newsImageWrapper}>
                       {post.mainImage?.asset ? (

@@ -5,7 +5,7 @@ import { researchNewsBySlugQuery, researchNewsMetaBySlugQuery } from '@/sanity/l
 import PostDetail from '@/components/PostDetail/PostDetail';
 import FadeIn from '@/components/FadeIn/FadeIn';
 import { notFound } from 'next/navigation';
-import { SITE_URL } from '@/lib/siteConfig';
+import { localeUrl } from '@/lib/siteConfig';
 
 export async function generateMetadata({
   params,
@@ -24,14 +24,14 @@ export async function generateMetadata({
     openGraph: {
       title: `${post.title} ${suffix}`,
       type: 'article',
-      url: `${SITE_URL}/allergy/${locale}/research/news/${slug}`,
+      url: localeUrl(locale, `/allergy/research/news/${slug}`),
       ...(post.mainImage?.asset?.url && { images: [{ url: post.mainImage.asset.url }] }),
     },
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}/research/news/${slug}`,
+      canonical: localeUrl(locale, `/allergy/research/news/${slug}`),
       languages: {
-        ja: `${SITE_URL}/allergy/ja/research/news/${slug}`,
-        en: `${SITE_URL}/allergy/en/research/news/${slug}`,
+        ja: localeUrl('ja', `/allergy/research/news/${slug}`),
+        en: localeUrl('en', `/allergy/research/news/${slug}`),
       },
     },
   };
@@ -56,7 +56,7 @@ export default async function ResearchNewsDetailPage({
     <FadeIn>
       <PostDetail
         post={post}
-        backLink={`/allergy/${locale}/research/news`}
+        backLink={'/allergy/research/news'}
         backText={`${t('backNews')}`}
       />
     </FadeIn>

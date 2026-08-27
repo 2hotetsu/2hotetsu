@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 import Image from 'next/image';
 import logoNav from '@/img/logo-nav.png';
 import { getTranslations, getLocale } from 'next-intl/server';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 export default async function Header() {
   const t = await getTranslations('Header');
@@ -13,7 +13,7 @@ export default async function Header() {
     <div className={styles.headerTop}>
       <div className={styles.headerContainer}>
         <div className={styles.logoArea}>
-          <Link href={`/allergy/${locale}/`} className={styles.logoLink}>
+          <Link href={'/allergy'} className={styles.logoLink}>
             <Image src={logoNav} alt="Logo" width={280} height={62} className={styles.logoImage} />
           </Link>
           <span className={styles.divider}>|</span>
@@ -29,7 +29,7 @@ export default async function Header() {
             <span>{t('address3')}</span>
           </Link>
           <div className={styles.actions}>
-            <LanguageSwitcher />
+            <LanguageSwitcher className={styles.select} />
             <MobileMenu />
           </div>
         </div>

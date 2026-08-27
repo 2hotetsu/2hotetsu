@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Shippori_Mincho_B1, EB_Garamond } from "next/font/google";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import HomeHeader from "@/components/home/HomeHeader";
 import HomeFooter from "@/components/home/HomeFooter";
+import { localeUrl } from "@/lib/siteConfig";
 import "./home.css";
 
 const notoSans = Noto_Sans_JP({
@@ -20,17 +22,40 @@ const garamond = EB_Garamond({
   variable: "--font-hm-en",
 });
 
-export const metadata: Metadata = {
-  title: "徳島大学大学院医歯薬学研究部　口腔科学部門　臨床歯学系　顎機能咬合再建学分野",
-  description:
-    "徳島大学大学院医歯薬学研究部　顎機能咬合再建学分野のホームページです。我々の分野では失った歯の修復、下顎の動き、歯ぎしり、金属アレルギー、睡眠時無呼吸症、顎関節症、口腔顔面痛などに関して研究を進めるとともに、治療に結びつくように努力しています。",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Dept" });
 
-export default function HomeLayout({
+  return {
+    title: {
+      default: t("meta.homeTitle"),
+      template: `%s | ${t("brand.main")}`,
+    },
+    description: t("meta.homeDesc"),
+    alternates: {
+      canonical: localeUrl(locale, "/"),
+      languages: {
+        ja: localeUrl("ja", "/"),
+        en: localeUrl("en", "/"),
+      },
+    },
+  };
+}
+
+export default async function HomeLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <div
       id="top"

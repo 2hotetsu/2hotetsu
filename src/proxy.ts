@@ -1,14 +1,14 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from '@/i18n/routing';
 
-// next-intl locale detection is NOT used here — the locale comes from
-// the [locale] URL segment and is set per-page via setRequestLocale().
-// Running intlMiddleware would prepend /ja/ to /allergy/ja/... paths.
-export default function middleware(_request: NextRequest) {
-  return NextResponse.next();
-}
+// With `localePrefix: 'as-needed'` this middleware rewrites /staff -> /ja/staff
+// internally (the address bar still shows /staff) and lets /en/staff through.
+export default createMiddleware(routing);
 
 export const config = {
   matcher: [
-    '/((?!_next|_vercel|studio|favicon\\.ico|.*\\..*).*)',
+    // Everything except Next's assets, the Studio, the SEO files at the root
+    // and any path with an extension (images, PDFs, legacy js).
+    '/((?!_next|_vercel|studio|sitemap\\.xml|robots\\.txt|.*\\..*).*)',
   ],
 };

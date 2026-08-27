@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import FadeIn from "@/components/FadeIn/FadeIn";
-import { SITE_URL } from '@/lib/siteConfig';
+import { localeUrl } from '@/lib/siteConfig';
 
 export async function generateMetadata({
   params,
@@ -19,10 +19,10 @@ export async function generateMetadata({
       ? '歯科金属アレルギー研究会,金属アレルギー研究,歯科金属アレルギー予防,徳島大学,金属アレルギー学術'
       : 'dental metal allergy research, metal allergy research group, Tokushima University',
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}/research`,
+      canonical: localeUrl(locale, '/allergy/research'),
       languages: {
-        ja: `${SITE_URL}/allergy/ja/research`,
-        en: `${SITE_URL}/allergy/en/research`,
+        ja: localeUrl('ja', '/allergy/research'),
+        en: localeUrl('en', '/allergy/research'),
       },
     },
   };
@@ -31,7 +31,7 @@ import Image from 'next/image';
 import styles from "./page.module.css";
 import heroImg from '@/img/research/hero.png';
 import PdfPreview from '@/components/PdfPreview/PdfPreviewNoSSR';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Access from '@/components/Access/Access';
 import joinImg from '@/img/research/qr-code.png';
 import { client } from '@/sanity/lib/client';
@@ -149,7 +149,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
             <div className={styles.sectionAltContainer}>
               <div className={styles.sectionHeader}>
                 <h3 className={styles.sectionTitle}>{t('newsTitle')}</h3>
-                <Link href={`/allergy/${locale}/research/news`} className={styles.viewAll}>
+                <Link href={'/allergy/research/news'} className={styles.viewAll}>
                   {t('viewAll')} &rarr;
                 </Link>
               </div>
@@ -169,7 +169,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
                                   }) 
                                 : '--/--'}
                             </span>
-                            <Link href={`/allergy/${locale}/research/news/${post.slug.current}`} className={styles.newsLink}>
+                            <Link href={`/allergy/research/news/${post.slug.current}`} className={styles.newsLink}>
                               {post.title}
                             </Link>
                           </li>

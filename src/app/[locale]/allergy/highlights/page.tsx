@@ -4,7 +4,7 @@ import { client } from '@/sanity/lib/client';
 import { highlightsQuery } from '@/sanity/lib/queries';
 import PostList from '@/components/PostList/PostList';
 import FadeIn from '@/components/FadeIn/FadeIn';
-import { SITE_URL } from '@/lib/siteConfig';
+import { localeUrl } from '@/lib/siteConfig';
 
 export async function generateMetadata({
   params,
@@ -19,10 +19,10 @@ export async function generateMetadata({
       ? '歯科用金属アレルギー外来のハイライト・注目トピックス一覧です。'
       : 'Highlights and featured topics from the Dental Metal Allergy Clinic.',
     alternates: {
-      canonical: `${SITE_URL}/allergy/${locale}/highlights`,
+      canonical: localeUrl(locale, '/allergy/highlights'),
       languages: {
-        ja: `${SITE_URL}/allergy/ja/highlights`,
-        en: `${SITE_URL}/allergy/en/highlights`,
+        ja: localeUrl('ja', '/allergy/highlights'),
+        en: localeUrl('en', '/allergy/highlights'),
       },
     },
   };
@@ -39,7 +39,7 @@ export default async function HighlightsListPage({ params }: { params: Promise<{
       <PostList
         title={`${t('highlightsTitle')}`}
         items={highlights}
-        basePath={`/allergy/${locale}/highlights`}
+        basePath={'/allergy/highlights'}
       />
     </FadeIn>
   );
