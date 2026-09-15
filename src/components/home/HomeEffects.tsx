@@ -75,7 +75,48 @@ export default function HomeEffects() {
     };
     document.addEventListener("click", onAnchorClick);
 
+    // The handler above only covers same-page anchors. A link from another page
+    // (/topics#june26) is scrolled by the router instead, and that lands exactly
+    // while this effect is mounting: Lenis is taking the scroll over and
+    // ScrollTrigger is refreshing, each with its own idea of where the page is.
+    // Whoever wins decides where you stop, which is why the landing is right
+    // some of the time and too far down the rest. Re-assert the target while the
+    // layout settles, and stop the moment the visitor scrolls for themselves.
+    const settleEvents = ["wheel", "touchstart", "keydown"] as const;
+    let hashTarget: HTMLElement | null = null;
+    try {
+      hashTarget =
+        window.location.hash.length > 1
+          ? document.querySelector<HTMLElement>(window.location.hash)
+          : null;
+    } catch {
+      hashTarget = null; // hash that is not a valid selector
+    }
+
+    const stopSettling = () => {
+      hashTarget = null;
+    };
+    const settle = () => {
+      if (!hashTarget) return;
+      // scroll-margin-top on the target supplies the fixed-header clearance
+      lenis.scrollTo(hashTarget, { immediate: true, force: true });
+    };
+
+    let settleTimer: ReturnType<typeof setTimeout> | undefined;
+    if (hashTarget) {
+      settleEvents.forEach((event) =>
+        window.addEventListener(event, stopSettling, { once: true, passive: true })
+      );
+      settle();
+      settleTimer = setTimeout(settle, 250);
+      window.addEventListener("load", settle);
+    }
+
     return () => {
+      stopSettling();
+      if (settleTimer) clearTimeout(settleTimer);
+      window.removeEventListener("load", settle);
+      settleEvents.forEach((event) => window.removeEventListener(event, stopSettling));
       document.removeEventListener("click", onAnchorClick);
       ctx.revert();
       gsap.ticker.remove(raf);

@@ -55,15 +55,6 @@ export default async function Achievements({
         ...archive.papers,
       ],
     },
-    {
-      id: "achievements02",
-      title: t("achievements.grants"),
-      en: "Research Grants",
-      items: [
-        ...sanityEntries.filter((e) => e.category === "grant").map((e) => e.title),
-        ...archive.grants,
-      ],
-    },
   ];
 
   return (
