@@ -15,6 +15,10 @@ const MATERIALS_NOTE: L = {
 
 export const getEducationIntro = (locale: Locale) => pick(INTRO, locale);
 
+// Nothing reads this today: the lecture materials block is hidden in
+// src/app/[locale]/(home)/education/page.tsx because the page it links to is
+// gone. Kept so the block can be restored without rebuilding it.
+
 export const getEducationMaterials = (locale: Locale) => ({
   href: "http://d49.dent.tokushima-u.ac.jp/groups/crbr/",
   jp: "講義資料",
