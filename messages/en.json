@@ -265,10 +265,9 @@
     },
     "achievements": {
       "title": "Achievements",
-      "desc": "A list of the department's academic papers and research grants.",
+      "desc": "A list of the department's academic papers.",
       "ariaNav": "Achievements navigation",
-      "papers": "Academic Papers",
-      "grants": "Research Grants"
+      "papers": "Academic Papers"
     },
     "footer": {
       "contactLabel": "Outpatient Enquiries",
@@ -286,7 +285,7 @@
       "recruitDesc": "Information for those wishing to join the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University, with questions and answers on research, clinical work, the duties of clinical fellows and departmental events.",
       "historyDesc": "The history of the Department of Stomatognathic Function and Occlusal Reconstruction (formerly the Second Department of Prosthodontics), Tokushima University, from its founding in 1979 to the present day.",
       "topicsDesc": "Topics and a record of activities at the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University.",
-      "achievementsDesc": "Achievements of the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University: a list of academic papers and research grants."
+      "achievementsDesc": "Achievements of the Department of Stomatognathic Function and Occlusal Reconstruction, Tokushima University: a list of academic papers."
     }
   }
 }

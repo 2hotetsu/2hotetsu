@@ -124,8 +124,7 @@ export const researchNewsQuery = groq`
 export const achievementsQuery = groq`
   *[_type == "achievement"] | order(_createdAt desc) {
     _id,
-    title,
-    category
+    title
   }
 `
 

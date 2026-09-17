@@ -51,7 +51,7 @@ export default async function Achievements({
       title: t("achievements.papers"),
       en: "Academic Papers",
       items: [
-        ...sanityEntries.filter((e) => e.category === "paper").map((e) => e.title),
+        ...sanityEntries.map((e) => e.title),
         ...archive.papers,
       ],
     },

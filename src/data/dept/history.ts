@@ -115,6 +115,14 @@ const ITEMS: RawHistoryItem[] = [
       en: "Professor Maki Hosoki takes office",
     },
   },
+  {
+    year: "2026",
+    era: { ja: "令和8年4月", en: "April 2026" },
+    text: {
+      ja: "大倉一夫 講師が徳島文理大学教授へ異動",
+      en: "Lecturer Kazuo Okura transfers to a professorship at Tokushima Bunri University",
+    },
+  },
 ];
 
 export const getHistoryItems = (locale: Locale): HistoryItem[] =>
