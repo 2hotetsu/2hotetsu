@@ -20,7 +20,7 @@ export default async function Research() {
                         <p>{t('text1')}</p>
                         <p>{t('text2')}</p>
                         <p>{t('text3')}</p>
-                        <Link href={'/allergy/research'} className={styles.joinButton}>
+                        <Link href={'/allergy/asmi'} className={styles.joinButton}>
                             {t('joinButton')}
                         </Link>
                     </div>

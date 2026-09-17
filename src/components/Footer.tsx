@@ -38,7 +38,7 @@ export default async function Footer() {
             <div className={styles.secondColumn}>
               <li><Link href={'/allergy#news'}>{t('news')}</Link></li>
               <li><Link href={'/allergy#highlights'}>{t('highlights')}</Link></li>
-              <li><Link href={'/allergy/research'}>{t('researchGroup')}</Link></li>
+              <li><Link href={'/allergy/asmi'}>{t('researchGroup')}</Link></li>
               <li><Link href={'/allergy#access'}>{t('access')}</Link></li>
             </div>
           </ul>

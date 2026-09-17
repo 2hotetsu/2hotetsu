@@ -19,10 +19,10 @@ export async function generateMetadata({
       ? '歯科金属アレルギー研究会,金属アレルギー研究,歯科金属アレルギー予防,徳島大学,金属アレルギー学術'
       : 'dental metal allergy research, metal allergy research group, Tokushima University',
     alternates: {
-      canonical: localeUrl(locale, '/allergy/research'),
+      canonical: localeUrl(locale, '/allergy/asmi'),
       languages: {
-        ja: localeUrl('ja', '/allergy/research'),
-        en: localeUrl('en', '/allergy/research'),
+        ja: localeUrl('ja', '/allergy/asmi'),
+        en: localeUrl('en', '/allergy/asmi'),
       },
     },
   };
@@ -149,7 +149,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
             <div className={styles.sectionAltContainer}>
               <div className={styles.sectionHeader}>
                 <h3 className={styles.sectionTitle}>{t('newsTitle')}</h3>
-                <Link href={'/allergy/research/news'} className={styles.viewAll}>
+                <Link href={'/allergy/asmi/news'} className={styles.viewAll}>
                   {t('viewAll')} &rarr;
                 </Link>
               </div>
@@ -169,7 +169,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
                                   }) 
                                 : '--/--'}
                             </span>
-                            <Link href={`/allergy/research/news/${post.slug.current}`} className={styles.newsLink}>
+                            <Link href={`/allergy/asmi/news/${post.slug.current}`} className={styles.newsLink}>
                               {post.title}
                             </Link>
                           </li>

@@ -16,7 +16,7 @@ export default async function ResearchNewsListPage({ params }: { params: Promise
       <PostList 
         title={t('newsTitle')} 
         items={news} 
-        basePath={'/allergy/research/news'}
+        basePath={'/allergy/asmi/news'}
       />
     </FadeIn>
   );

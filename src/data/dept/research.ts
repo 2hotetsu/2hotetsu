@@ -91,7 +91,7 @@ const SECTIONS: ResearchSection[] = [
       },
     ],
     link: {
-      href: "/allergy/research",
+      href: "/allergy/asmi",
       label: {
         ja: "金属アレルギー研究の詳細",
         en: "More on our metal allergy research",
