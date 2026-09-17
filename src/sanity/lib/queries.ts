@@ -119,6 +119,15 @@ export const researchNewsQuery = groq`
   }
 `
 
+// Publications added through the Studio; the page prepends them to the frozen
+// archive in src/data/dept/achievements.html
+export const achievementsQuery = groq`
+  *[_type == "achievement"] | order(_createdAt desc) {
+    _id,
+    title
+  }
+`
+
 // Get the latest department news entries (used on the dept home page and topics page)
 export const deptNewsQuery = groq`
   *[_type == "deptNews"] | order(date desc)[0...$limit] {

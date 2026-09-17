@@ -15,9 +15,8 @@ import type { StructureResolver } from 'sanity/structure'
  * type left out here becomes unreachable in the sidebar, and one listed here
  * but missing from the schema breaks the Studio.
  *
- * This file differs between branches on purpose: the dev branch also has an
- * `achievement` type, which does not exist here. When dev is merged, keep the
- * dev version of this file.
+ * Both branches now carry the same document types, so this file matches the one
+ * on dev apart from the routes each branch serves.
  */
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -49,6 +48,9 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .id('department-page')
             .title('Department page')
-            .items([S.documentTypeListItem('deptNews').title('新着情報')])
+            .items([
+              S.documentTypeListItem('deptNews').title('新着情報'),
+              S.documentTypeListItem('achievement').title('業績'),
+            ])
         ),
     ])
