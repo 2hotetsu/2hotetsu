@@ -7,6 +7,7 @@ import { extractYouTubeId } from '@/utils/youtube';
 import PdfCardPreviewNoSSR from '@/components/PdfPreview/PdfCardPreviewNoSSR';
 import styles from './PostList.module.css';
 import { useTranslations } from 'next-intl';
+import { formatDate } from '@/lib/formatDate';
 
 
 
@@ -60,7 +61,7 @@ export default function PostList({ title, items, basePath }: PostListProps) {
               )}
               <div className={styles.content}>
                 <div className={styles.date}>
-                  {item.publishedAt ? new Date(item.publishedAt).toLocaleDateString() : ''}
+                  {formatDate(item.publishedAt)}
                 </div>
                 <h2 className={styles.postTitle}>{item.title}</h2>
                 <div className={styles.readMore}>{t('readMore')} &rarr;</div>

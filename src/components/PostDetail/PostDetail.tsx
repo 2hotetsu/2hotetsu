@@ -4,6 +4,7 @@ import { PortableText } from 'next-sanity';
 import { urlForImage } from '@/sanity/lib/image';
 import PdfPreviewNoSSR from '@/components/PdfPreview/PdfPreviewNoSSR';
 import styles from './PostDetail.module.css';
+import { formatDate } from '@/lib/formatDate';
 
 interface PostDetailProps {
   post: any;
@@ -36,7 +37,7 @@ export default function PostDetail({ post, backLink, backText }: PostDetailProps
       <header className={styles.header}>
         <h1 className={styles.title}>{post.title}</h1>
         {post.publishedAt && (
-          <div className={styles.date}>{new Date(post.publishedAt).toLocaleDateString()}</div>
+          <div className={styles.date}>{formatDate(post.publishedAt)}</div>
         )}
       </header>
 
