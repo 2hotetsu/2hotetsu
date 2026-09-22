@@ -2,6 +2,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+// import { Analytics } from "@vercel/analytics/next"
+
 
 // Root layout for the whole public site (/studio has its own).
 // Titles and descriptions live in each section's layout — (home) and allergy —
@@ -26,6 +28,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      {/* <Analytics/> */}
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

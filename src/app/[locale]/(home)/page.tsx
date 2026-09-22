@@ -27,16 +27,16 @@ const SECTION_CARDS = [
 
 const RELATED_LINKS = [
   {
-    href: "http://www.tokushima-hosp.jp/",
-    external: true,
-    key: "linkHospital",
-    en: "Tokushima University Hospital",
-  },
-  {
     href: "/allergy",
     external: false,
     key: "linkAllergy",
     en: "Dental Metal Allergy Clinic",
+  },
+  {
+    href: "http://www.tokushima-hosp.jp/",
+    external: true,
+    key: "linkHospital",
+    en: "Tokushima University Hospital",
   },
   {
     href: "http://www.tokushima-u.ac.jp/dent/",
@@ -66,7 +66,7 @@ export default async function Home({
         <div className="hm-container hm-greeting-grid">
           <div className="hm-greeting-photo" data-reveal>
             <Image
-              src="/images/matuka.jpg"
+              src="/images/matsuka.jpg"
               alt={t("home.greetingPhotoAlt")}
               width={300}
               height={300}
