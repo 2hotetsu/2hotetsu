@@ -1,4 +1,4 @@
-import type { StructureResolver } from 'sanity/structure'
+import type { StructureBuilder, StructureResolver } from 'sanity/structure'
 
 /**
  * Custom sidebar for the Studio.
@@ -51,6 +51,36 @@ export const structure: StructureResolver = (S) =>
             .items([
               S.documentTypeListItem('deptNews').title('新着情報'),
               S.documentTypeListItem('achievement').title('業績'),
+              S.divider(),
+              ...staffItems(S),
             ])
         ),
     ])
+
+// Members whose id no section of the staff page references, i.e. people who
+// are kept in the dataset but not shown. Both forms of each reference are
+// compared, so a member with unpublished edits (id "drafts.…") is not
+// mistaken for an unlisted one.
+const UNLISTED_STAFF_FILTER = `_type == "staffMember"
+  && !(_id in *[_type == "staffPage"].sections[].members[]._ref)
+  && !(_id in *[_type == "staffPage"].sections[].members[]{"id": "drafts." + _ref}.id)`
+
+const staffItems = (S: StructureBuilder) => [
+  S.listItem()
+    .id('staffPage')
+    .title('スタッフページ（掲載順）')
+    .child(S.document().schemaType('staffPage').documentId('staffPage')),
+  S.documentTypeListItem('staffMember').title('スタッフ'),
+  S.listItem()
+    .id('staff-unlisted')
+    .title('未掲載のスタッフ')
+    .child(
+      S.documentList()
+        .id('staff-unlisted-list')
+        .title('未掲載のスタッフ')
+        .schemaType('staffMember')
+        .apiVersion('2024-03-18')
+        .filter(UNLISTED_STAFF_FILTER)
+    ),
+  S.documentTypeListItem('staffQualification').title('資格・専門分野'),
+]
