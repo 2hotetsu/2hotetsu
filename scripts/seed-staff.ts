@@ -1,29 +1,28 @@
-// Staff roster, extracted from the legacy staff.html.
-// Emails keep the full-width ＠ for display (anti-scraping); the mailto
-// href is derived by normalising it back to @.
+// One-off import of the staff roster into Sanity.
+//
+// The roster used to live in src/data/dept/staff.ts (extracted from the legacy
+// staff.html) and the staff page read it from there. The page now reads the
+// Studio's スタッフページ instead; this script copies the roster across once so
+// the Studio starts with everyone in it rather than empty.
+//
+//   npx sanity login                                         (once)
+//   npx sanity exec scripts/seed-staff.ts --with-user-token -- --dry-run
+//   npx sanity exec scripts/seed-staff.ts --with-user-token
+//
+// Every write is createIfNotExists under a fixed id, so running it again never
+// overwrites what was edited in the Studio — it only fills in what is missing.
+// Photos dedupe by content on Sanity's side, so re-uploading costs nothing.
 //
 // Romanised names follow the department's own bilingual news posts
 // (data/dept/topics-archive.json) wherever those name the person in English.
+// Emails are written with the full-width ＠ below because that is how the old
+// page displayed them; they are stored with a normal @ and the page converts.
 
-import type { Locale } from "@/i18n/routing";
-import { type L, pick } from "./i18n";
+import { createReadStream } from "node:fs";
+import { basename, join } from "node:path";
+import { getCliClient } from "sanity/cli";
 
-export interface StaffMember {
-  name: string;
-  img: string;
-  /** extra line shown above the specialties (e.g. previous affiliation) */
-  note?: string;
-  specialties: string[];
-  email?: string;
-}
-
-export interface StaffSection {
-  /** anchor id — kept from the old page (staff01…staff13) for link compat */
-  id: string;
-  title: string;
-  en: string;
-  members: StaffMember[];
-}
+type L = { ja: string; en: string };
 
 interface RawStaffMember {
   name: L;
@@ -427,22 +426,101 @@ const SECTIONS: RawStaffSection[] = [
   },
 ];
 
-export const getStaffSections = (locale: Locale): StaffSection[] =>
-  SECTIONS.map(({ id, title, en, members }) => ({
-    id,
-    // the position label already existed in both languages on the old page
-    title: locale === "en" ? en : title,
-    en,
-    members: members.map(({ name, img, note, specialties, email }) => ({
-      name: pick(name, locale),
-      img,
-      ...(note && { note: pick(note, locale) }),
-      specialties: specialties.map((s) => pick(s, locale)),
-      ...(email && { email }),
-    })),
-  }));
+// ── import ────────────────────────────────────────────────────────────────
 
-/** "name＠domain" (display form) → "mailto:name@domain" */
-export function mailtoHref(email: string): string {
-  return `mailto:${email.replace(/＠/g, "@").replace(/\s+/g, "")}`;
+const DRY_RUN = process.argv.includes("--dry-run");
+const client = getCliClient({ apiVersion: "2024-03-18" });
+
+/** "Yoshizo Matsuka" → "yoshizo-matsuka" */
+const slug = (s: string) =>
+  s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+// Ids use "-" and never "." — an id containing a dot is private in Sanity and
+// would be invisible to the site, which reads the dataset without a token.
+const qualificationId = (key: string) => `staffQualification-${key}`;
+const memberId = (m: RawStaffMember) => `staffMember-${slug(m.name.en)}`;
+
+const ref = (id: string) => ({ _type: "reference", _ref: id, _key: id });
+
+async function main() {
+  const qualificationKey = new Map<L, string>(
+    Object.entries(Q).map(([key, q]) => [q, key])
+  );
+  const keyOf = (q: L) => {
+    const key = qualificationKey.get(q);
+    if (!key) throw new Error(`qualification not declared in Q: ${q.ja}`);
+    return key;
+  };
+
+  const members = SECTIONS.flatMap((s) => s.members);
+  const ids = members.map(memberId);
+  const dup = ids.find((id, i) => ids.indexOf(id) !== i);
+  if (dup) throw new Error(`two members map to the same id: ${dup}`);
+
+  // photos first: each member document embeds its asset reference
+  const photoAsset = new Map<string, string>();
+  for (const m of members) {
+    if (m.img === NO_IMAGE || photoAsset.has(m.img)) continue;
+    if (DRY_RUN) {
+      photoAsset.set(m.img, "(dry run)");
+      continue;
+    }
+    const path = join(process.cwd(), "public", m.img);
+    const asset = await client.assets.upload("image", createReadStream(path), {
+      filename: basename(path),
+    });
+    photoAsset.set(m.img, asset._id);
+    console.log(`photo  ${m.img}`);
+  }
+
+  const tx = client.transaction();
+
+  for (const [key, q] of Object.entries(Q)) {
+    tx.createIfNotExists({ _id: qualificationId(key), _type: "staffQualification", ...q });
+  }
+
+  for (const m of members) {
+    const asset = photoAsset.get(m.img);
+    tx.createIfNotExists({
+      _id: memberId(m),
+      _type: "staffMember",
+      name_ja: m.name.ja,
+      name_en: m.name.en,
+      ...(asset &&
+        !DRY_RUN && { photo: { _type: "image", asset: { _type: "reference", _ref: asset } } }),
+      ...(m.note && { note_ja: m.note.ja, note_en: m.note.en }),
+      qualifications: m.specialties.map((q) => ref(qualificationId(keyOf(q)))),
+      ...(m.email && { email: m.email.replace(/＠/g, "@") }),
+    });
+  }
+
+  tx.createIfNotExists({
+    _id: "staffPage",
+    _type: "staffPage",
+    sections: SECTIONS.map(({ id, title, en, members }) => ({
+      _type: "staffSection",
+      _key: id,
+      title_ja: title,
+      title_en: en,
+      anchor: id,
+      members: members.map((m) => ref(memberId(m))),
+    })),
+  });
+
+  console.log(
+    `${Object.keys(Q).length} qualifications, ${members.length} members, ` +
+      `${SECTIONS.length} sections, ${photoAsset.size} photos`
+  );
+
+  if (DRY_RUN) {
+    console.log("dry run — nothing written");
+    return;
+  }
+  await tx.commit();
+  console.log("done");
 }
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

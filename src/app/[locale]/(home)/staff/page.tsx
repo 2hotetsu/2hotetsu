@@ -4,8 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import PageHero from "@/components/home/PageHero";
 import HeadingSm from "@/components/home/HeadingSm";
 import HomeEffects from "@/components/home/HomeEffects";
-import { getStaffSections, mailtoHref } from "@/data/dept/staff";
-import type { Locale } from "@/i18n/routing";
+import { getStaffSections, mailtoHref } from "@/lib/dept/getStaffSections";
 
 export async function generateMetadata({
   params,
@@ -26,9 +25,7 @@ export default async function Staff({
   setRequestLocale(locale);
   const t = await getTranslations("Dept");
 
-  const sections = getStaffSections(locale as Locale).filter(
-    (s) => s.members.length > 0
-  );
+  const sections = await getStaffSections(locale);
 
   return (
     <main className="hm-main hm-subpage">
@@ -50,7 +47,7 @@ export default async function Staff({
             <HeadingSm title={title} en={en} />
             <div className="hm-staff-grid" data-reveal-group>
               {members.map((m) => (
-                <article className="hm-staff-card" key={m.name} data-reveal-item>
+                <article className="hm-staff-card" key={m.id} data-reveal-item>
                   <div className="hm-staff-photo">
                     <Image src={m.img} alt={m.name} width={140} height={140} />
                   </div>
