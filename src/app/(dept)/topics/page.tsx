@@ -39,7 +39,7 @@ function renderEntryRows(entry: DeptNewsEntry): string {
       const img = entry.images[i];
       if (!img) return "<th></th>";
       const alt = img.alt ? escapeHtml(img.alt) : "";
-      return `<th><img src="${img.url}" alt="${alt}" width="340"></th>`;
+      return `<th><img src="${img.frameUrl}" alt="${alt}" width="340"></th>`;
     });
     html += `  <tr>\n    ${cells.join("\n    ")}\n  </tr>\n`;
   }

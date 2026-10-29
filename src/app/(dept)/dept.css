@@ -141,15 +141,16 @@ h5{font-weight:bold;margin:10px 0;}
 .topics_t{border-top:1px solid #D7D7D7;border-left:1px solid #D7D7D7;width:100%;}
 .topics_t td{border-right:1px solid #D7D7D7;border-bottom:1px solid #D7D7D7;padding:5px;vertical-align:top;}
 .topics_t th{border-right:1px solid #D7D7D7;border-bottom:1px solid #D7D7D7;background-color:#F3F3F3;text-align:center;font-weight:bold;padding:5px;width:50%;}
-/* Photos used to take whatever height their proportions gave them, so a
-   portrait phone shot stood almost twice as tall as a landscape one. Each
-   half-width photo now fills a square the width of its cell and is fitted
-   inside it whole: a portrait photo leaves the cell's grey showing at the
-   sides, a landscape one above and below — the same grey an empty cell
-   shows. Nothing is cropped. Only half-width photos (width="340", which is
-   what both the archive and the Sanity entries use) are boxed; the few
-   full-width 680px banners keep their own shape. */
-.topics_t th img[width="340"]{width:100%;max-width:340px;height:auto;aspect-ratio:1/1;object-fit:contain;vertical-align:middle;}
+/* Half-width photos fill the cell's width and keep their own proportions,
+   so landscape photos are shown whole and untouched. A portrait photo,
+   though, would stand far taller than its neighbours, so the height is
+   capped at 4:3 of the width (min(252px, 34.5vw) tracks the cell: 336px of
+   content on desktop, about half the screen on a phone) and the photo is
+   fitted inside that frame whole, with bars at the sides in the cell's own
+   grey — the way the department once padded portrait shots by hand, and the
+   same grey an empty cell shows. Nothing is cropped. The few full-width
+   680px banners (width="680") are left alone. */
+.topics_t th img[width="340"]{width:100%;max-width:340px;height:auto;max-height:min(252px,34.5vw);object-fit:contain;background:#F3F3F3;vertical-align:middle;}
 
 .img_box{clear:both;padding:10px;margin:5px;}
 .img_box p{clear:both;}

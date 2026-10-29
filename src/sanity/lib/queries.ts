@@ -135,7 +135,8 @@ export const deptNewsQuery = groq`
     date,
     body,
     images[] {
-      asset->{ url, metadata { dimensions } },
+      asset->{ _id, url, metadata { dimensions } },
+      crop,
       alt
     }
   }
