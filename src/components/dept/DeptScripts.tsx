@@ -118,17 +118,23 @@ export default function DeptScripts() {
         });
 
         // ── Sticky sub-nav ────────────────────────────────────────────────
-        $(window).off('scroll.dept');
+        // The menu's resting position is read from its #smenu wrapper on every
+        // check rather than once at init: the wrapper stays in the flow while
+        // the menu itself is fixed, and its top moves as the images above it
+        // finish loading. The check also runs right away and on load/resize,
+        // not only on scroll — a page opened at an anchor (/staff#staff10) or
+        // restored mid-page would otherwise leave the menu stranded at the top
+        // of the document until the reader happened to scroll.
+        $(window).off('scroll.dept resize.dept load.dept');
         const nav = $('.smenu');
-        if (nav.length) {
-          const offsetTop = nav.offset()!.top;
-          $(window).on('scroll.dept', function () {
-            if ($(window).scrollTop()! > offsetTop - 20) {
-              nav.addClass('fixed');
-            } else {
-              nav.removeClass('fixed');
-            }
-          });
+        const anchor = $('#smenu');
+        if (nav.length && anchor.length) {
+          const update = () => {
+            const offsetTop = anchor.offset()!.top;
+            nav.toggleClass('fixed', $(window).scrollTop()! > offsetTop - 20);
+          };
+          $(window).on('scroll.dept resize.dept load.dept', update);
+          update();
         }
       } catch (err) {
         console.warn('DeptScripts initialization failed:', err);
@@ -140,7 +146,7 @@ export default function DeptScripts() {
       const win = window as unknown as { jQuery?: JQueryStatic };
       if (win.jQuery) {
         const $ = win.jQuery;
-        $(window).off('scroll.dept');
+        $(window).off('scroll.dept resize.dept load.dept');
         $('.pagetop a, .smenu li a').off('click.dept');
       }
     };
