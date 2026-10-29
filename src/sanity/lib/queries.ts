@@ -171,3 +171,26 @@ export const researchNewsBySlugQuery = groq`
     pdfFile { "url": asset->url }
   }
 `
+
+// The staff page: its sections in page order, each with its members in
+// display order. English fields fall back to Japanese when left empty.
+// `members[]->` yields null for a reference to a member that was never
+// published, so those are filtered out before rendering.
+export const staffPageQuery = groq`
+  *[_id == "staffPage"][0].sections[] {
+    _key,
+    "title": coalesce(select($locale == "en" => title_en), title_ja),
+    "en": title_en,
+    anchor,
+    "members": members[]-> {
+      _id,
+      "name": coalesce(select($locale == "en" => name_en), name_ja),
+      photo,
+      "note": coalesce(select($locale == "en" => note_en), note_ja),
+      "specialties": qualifications[]->{
+        "label": coalesce(select($locale == "en" => en), ja)
+      }.label,
+      email
+    }
+  }
+`
