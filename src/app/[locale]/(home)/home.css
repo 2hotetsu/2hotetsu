@@ -1170,11 +1170,22 @@ body {
   padding: clamp(18px, 2.5vw, 28px);
 }
 
+/* A photo spans its column and keeps its proportions, but never stands
+   taller than 4:3 of the column's width: a portrait shot would otherwise be
+   far taller than the landscape photos around it. Past that cap it is
+   fitted whole inside the column (object-fit: contain) — it reads as a
+   narrower photo centred in the column, since the bars at its sides are
+   transparent over the card's white. Nothing is cropped. The box keeps the
+   column's width rather than going width:auto, which would size it by
+   whichever srcset file Next served and shrink small archive photos. The
+   grid is a size container so the cap can be written in terms of the
+   column width (cqw = 1% of the grid's width). */
 .hm-topic-images {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   margin-bottom: 16px;
+  container-type: inline-size;
 }
 .hm-topic-images[data-count="1"] {
   grid-template-columns: minmax(0, 560px);
@@ -1183,7 +1194,13 @@ body {
 .hm-topic-images img {
   width: 100%;
   height: auto;
+  /* two columns of (100cqw - the 12px gap) / 2 */
+  max-height: calc((100cqw - 12px) * 0.375);
+  object-fit: contain;
   display: block;
+}
+.hm-topic-images[data-count="1"] img {
+  max-height: calc(min(100cqw, 560px) * 0.75);
 }
 
 .hm-topic-text {
@@ -1665,6 +1682,9 @@ body {
 
   .hm-topic-images {
     grid-template-columns: 1fr;
+  }
+  .hm-topic-images img {
+    max-height: calc(100cqw * 0.75);
   }
 
   .hm-feat-grid {
