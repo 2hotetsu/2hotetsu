@@ -113,8 +113,13 @@ h5{font-weight:bold;margin:10px 0;}
 .smenu .li_none a:hover{background:none;}
 .smenu .padli a{padding-top:2px;height:38px;}
 
-.staff_box{clear:both;margin:0 auto 10px;margin-right:-5px;overflow:hidden;}
-.staff_t{border:1px solid #D7D7D7;width:48%;float:left;margin:5px;}
+/* Cards sit in rows of two. This used to be done with float:left, which
+   breaks when cards differ in height (a wrapped name or email): a card can
+   catch on a taller one in the row above and land in the right-hand column,
+   leaving a hole on the left. Flex wraps by row instead, and stretches each
+   card to the height of its row partner. */
+.staff_box{clear:both;margin:0 auto 10px;margin-right:-5px;display:flex;flex-wrap:wrap;}
+.staff_t{border:1px solid #D7D7D7;width:48%;margin:5px;}
 .staff_t a{
   font-size:12px;
   color:#333;
